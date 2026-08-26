@@ -68,43 +68,34 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @param in Scanner para entrada por consola.
      */
     public static void iniciarRonda(Scanner in) {
-        System.out.println("\n == Ronda selccionada preparada ==");
+        System.out.println("\n Ronda selccionada preparando... ");
         char apuestaelegida = leerTipoApuesta(in);
         int numeroganador = girarRuleta();
        boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
         // mostrarResultado();
-
     }
 
     public static char leerTipoApuesta(Scanner in) {
-        System.out.println("\n == seleccione apuesta ==");
-        System.out.println("\n(R, para Rojo / N, para Negro)");
-        System.out.println("(P, para Par / I, para Impar)");
-        System.out.println("(M, Regresar al menu )");
-        System.out.print("Seleccione:");
+        System.out.println("==============================");
+        System.out.println("Seleccione apuesta");
+        System.out.println("\n'R' para Rojo.\n" +
+                "\n" +
+                "'N' para Negro.\n" +
+                "\n" +
+                "'P' para Par.\n" +
+                "\n" +
+                "'I' para Impar.");
+        System.out.println("==============================");
+        System.out.print(" Seleccione:");
        // leemos palabra, mayúscula, y extraemos la letra 0
         char op = in.next().toUpperCase().charAt(0);
         in.nextLine();
         return op;
     }
-    /**
-     * Simula el giro de la ruleta generando un número
-     * aleatorio de 0 a 36.
-     *
-     * @return número de la ruleta.
-     */
     public static int girarRuleta() {
         // Genera y retorna un número aleatorio entre 0 y 36
         return rng.nextInt(CANTIDAD_NUMEROS);
     }
-    /**
-     * Evalúa si la apuesta realizada por el jugador
-     * fue acertada.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param tipo tipo de apuesta elegida.
-     * @return true si acertó, false si perdió.
-     */
     public static boolean evaluarResultado(int numero, char tipo) {
         if (numero == 0) {
             return false;
@@ -129,7 +120,11 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
  * @return true si es rojo, false en caso contrario.
  */
 public static boolean esRojo(int n) {
-// TODO: Buscar el número en el arreglo numerosRojos.
+    for (int i = 0; i < numerosRojos.length; i++){
+        if (numerosRojos[i] == n);{
+            return true;
+        }
+    }
     return false;
 }
     /**
