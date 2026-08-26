@@ -11,9 +11,6 @@ public class Ruleta {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
             19, 21, 23, 25, 27, 30, 32, 34, 36
     };
-    /**
-     * Método principal: inicia el programa llamando al menú.
-     */
     public static void main(String[] args) {
         menu();
     }
@@ -25,19 +22,16 @@ public class Ruleta {
             mostrarMenu();
             opcionElegida = leerOpcion(in);
             ejecutarOpcion(opcionElegida, in);
-
         } while (opcionElegida != 3);
 
      }
-    /**
-     * Muestra en consola las opciones disponibles del menú.
-     */
+
     public static void mostrarMenu() {
         System.out.println("\n=== Bienveido al casino Black Cat ===");
-        System.out.println("Jugue con moderacion");
+        System.out.println("    === Jugue con moderacion ===    ");
 
-        System.out.println("1. Iniciar juego");
-        System.out.println("2.Ver Estadisticas ");
+        System.out.println("\n1. Iniciar juego");
+        System.out.println("2. Ver Estadisticas ");
         System.out.println("3. Salir");
         System.out.print("Elige una opción: ");
     }
@@ -50,7 +44,20 @@ public class Ruleta {
     }
 
 public static void ejecutarOpcion(int opcion, Scanner in) {
-// TODO: Ejecutar la acción asociada a la opción.
+    switch (opcion) {
+        case 1:
+            iniciarRonda(in);
+            break;
+        case 2:
+            mostrarEstadisticas();
+            break;
+        case 3:
+            System.out.println("Gracias por visitar el Casino Black Cat. ¡Vuelva pronto!");
+            break;
+        default:
+            System.out.println("Opcion invalida. Por favor, intente nuevamente.");
+            break;
+    }
 }
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar,
@@ -59,19 +66,20 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @param in Scanner para entrada por consola.
      */
     public static void iniciarRonda(Scanner in) {
-// TODO: Implementar el flujo completo de una ronda.
+
     }
-    /**
-     * Permite al usuario seleccionar el tipo de apuesta
-     * (R/N/P/I).
-     *
-     * @param in Scanner para entrada por consola.
-     * @return el tipo de apuesta elegido.
-     */
-   // public static char leerTipoApuesta(Scanner in) {
-// TODO: Leer y validar el tipo de apuesta.
-     //   return
-//    }
+
+    public static char leerTipoApuesta(Scanner in) {
+        System.out.println("Ronda Preparada, seleccione apuesta");
+        System.out.println("(R, para Rojo / N, para Negro)");
+        System.out.println("(P, para Par / I, para Impar)");
+        System.out.println("(M, Regresar al menu )");
+        System.out.print("Seleccione:");
+       // leemos palabra, mayúscula, y extraemos la letra 0
+        char op = in.next().toUpperCase().charAt(0);
+        in.nextLine();
+        return op;
+    }
     /**
      * Simula el giro de la ruleta generando un número
      * aleatorio de 0 a 36.
@@ -79,6 +87,7 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
+
 // TODO: Generar y retornar un número entre 0 y 36.
         return 0;
     }
