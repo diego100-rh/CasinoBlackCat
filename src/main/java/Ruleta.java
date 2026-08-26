@@ -6,6 +6,8 @@ public class Ruleta {
     public static int[] historialApuestas = new int[MAX_HISTORIAL];
     public static boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
     public static int historialSize = 0;
+    public static final int CANTIDAD_NUMEROS = 37;
+    int numeroGanador = rng.nextInt(CANTIDAD_NUMEROS);
     public static Random rng = new Random();
     public static int[] numerosRojos = {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
@@ -66,12 +68,17 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @param in Scanner para entrada por consola.
      */
     public static void iniciarRonda(Scanner in) {
+        System.out.println("\n == Ronda selccionada preparada ==");
+        char apuestaelegida = leerTipoApuesta(in);
+        int numeroganador = girarRuleta();
+       boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
+        // mostrarResultado();
 
     }
 
     public static char leerTipoApuesta(Scanner in) {
-        System.out.println("Ronda Preparada, seleccione apuesta");
-        System.out.println("(R, para Rojo / N, para Negro)");
+        System.out.println("\n == seleccione apuesta ==");
+        System.out.println("\n(R, para Rojo / N, para Negro)");
         System.out.println("(P, para Par / I, para Impar)");
         System.out.println("(M, Regresar al menu )");
         System.out.print("Seleccione:");
@@ -87,9 +94,8 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
-
-// TODO: Generar y retornar un número entre 0 y 36.
-        return 0;
+        // Genera y retorna un número aleatorio entre 0 y 36
+        return rng.nextInt(CANTIDAD_NUMEROS);
     }
     /**
      * Evalúa si la apuesta realizada por el jugador
@@ -100,8 +106,22 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
      * @return true si acertó, false si perdió.
      */
     public static boolean evaluarResultado(int numero, char tipo) {
-// TODO: Evaluar el resultado según el tipo de apuesta.
-        return false;
+        if (numero == 0) {
+            return false;
+        }
+         switch (tipo){
+            case 'R':
+                return esRojo(numero);
+             case 'N':
+                 return !esRojo(numero); // El signo "!" significa "NO". Gana si NO es rojo.
+             case 'P':
+                 return (numero % 2 == 0); // Gana si es par
+             case 'I':
+                 return (numero % 2 != 0); // Gana si es impar
+             default:
+                 return false; // Por seguridad, si llega una letra extraña, pierde.
+         }
+
     }
 /**
  * Determina si un número corresponde a color rojo.
