@@ -77,6 +77,7 @@ public class Ruleta {
         int numeroganador = girarRuleta();
         boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
 
+        registrarResultado(numeroganador,apuestaelegida,posiblevictoria);
         mostrarResultado(numeroganador,apuestaelegida,montoApostado, posiblevictoria );
 
     }
@@ -152,7 +153,6 @@ public class Ruleta {
         }
     }
 
-
 /**
  * Muestra en consola el resultado de la ronda.
  *
@@ -163,11 +163,20 @@ public class Ruleta {
  */
    public static void mostrarResultado(int numero, char tipo, int monto, boolean
         acierto) {
-
-
+       {
+       System.out.println("\n===============================");
+       System.out.print(" -Mostrando Resultado de juego: ");
+       System.out.println("===============================");
+       System.out.println("La ruleta se detubo en el número: " + numero);
+        if (acierto) {
+            int premio = monto * 2;
+            System.out.println("SIIII HAS GANDO CON TU MONTO DE: " +monto+ "OPTUBISTE UN MONTO EXTRA DE:" + premio);
+        } else {
+            System.out.println("Lo siento tu aouesta" + monto + "fue rechazada");
+            System.out.println("Monto perdido: " +monto);
+            }
+        }
    }
-
-
     // TODO: Mostrar los datos y el resultado de la ronda.
 
 
@@ -177,7 +186,7 @@ public class Ruleta {
  */
     public static void mostrarEstadisticas() {
 // TODO: Calcular y mostrar las estadísticas acumuladas.
-    System.out.println("Mostrando estadisticas actuales...");
-}
+    System.out.println("Mostrando estadisticas actuales...");}
+
 
 }
