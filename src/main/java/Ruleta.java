@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+
 public class Ruleta {
     public static final int MAX_HISTORIAL = 100;
     public static int[] historialNumeros = new int[MAX_HISTORIAL];
@@ -7,12 +8,12 @@ public class Ruleta {
     public static boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
     public static int historialSize = 0;
     public static final int CANTIDAD_NUMEROS = 37;
-    int numeroGanador = rng.nextInt(CANTIDAD_NUMEROS);
     public static Random rng = new Random();
     public static int[] numerosRojos = {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
             19, 21, 23, 25, 27, 30, 32, 34, 36
     };
+
     public static void main(String[] args) {
         menu();
     }
@@ -26,7 +27,7 @@ public class Ruleta {
             ejecutarOpcion(opcionElegida, in);
         } while (opcionElegida != 3);
 
-     }
+    }
 
     public static void mostrarMenu() {
         System.out.println("\n=== Bienveido al casino Black Cat ===");
@@ -39,28 +40,28 @@ public class Ruleta {
     }
 
     public static int leerOpcion(Scanner in) {
-        Scanner lector = new Scanner(System.in);
-        int opcion = lector.nextInt();
-        lector.nextLine();
+        int opcion = in.nextInt();
+        in.nextLine();
         return opcion;
     }
 
-public static void ejecutarOpcion(int opcion, Scanner in) {
-    switch (opcion) {
-        case 1:
-            iniciarRonda(in);
-            break;
-        case 2:
-            mostrarEstadisticas();
-            break;
-        case 3:
-            System.out.println("Gracias por visitar el Casino Black Cat. ¡Vuelva pronto!");
-            break;
-        default:
-            System.out.println("Opcion invalida. Por favor, intente nuevamente.");
-            break;
+    public static void ejecutarOpcion(int opcion, Scanner in) {
+        switch (opcion) {
+            case 1:
+                iniciarRonda(in);
+                break;
+            case 2:
+                mostrarEstadisticas();
+                break;
+            case 3:
+                System.out.println("Gracias por visitar el Casino Black Cat. ¡Vuelva pronto!");
+                break;
+            default:
+                System.out.println("Opcion invalida. Por favor, intente nuevamente.");
+                break;
+        }
     }
-}
+
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar,
      * evaluar y mostrar resultado.
@@ -70,9 +71,14 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
     public static void iniciarRonda(Scanner in) {
         System.out.println("\n Ronda selccionada preparando... ");
         char apuestaelegida = leerTipoApuesta(in);
+        System.out.print("Ingrese el monto de la apuesta $: ");
+        int montoApostado = in.nextInt();
+        in.nextLine();
         int numeroganador = girarRuleta();
-       boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
-        // mostrarResultado();
+        boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
+
+        mostrarResultado(numeroganador,apuestaelegida,montoApostado, posiblevictoria );
+
     }
 
     public static char leerTipoApuesta(Scanner in) {
@@ -87,74 +93,91 @@ public static void ejecutarOpcion(int opcion, Scanner in) {
                 "'I' para Impar.");
         System.out.println("==============================");
         System.out.print(" Seleccione:");
-       // leemos palabra, mayúscula, y extraemos la letra 0
+        // leemos palabra, mayúscula, y extraemos la letra 0
         char op = in.next().toUpperCase().charAt(0);
         in.nextLine();
         return op;
     }
+
     public static int girarRuleta() {
         // Genera y retorna un número aleatorio entre 0 y 36
         return rng.nextInt(CANTIDAD_NUMEROS);
     }
+
     public static boolean evaluarResultado(int numero, char tipo) {
         if (numero == 0) {
             return false;
         }
-         switch (tipo){
+        switch (tipo) {
             case 'R':
                 return esRojo(numero);
-             case 'N':
-                 return !esRojo(numero); // El signo "!" significa "NO". Gana si NO es rojo.
-             case 'P':
-                 return (numero % 2 == 0); // Gana si es par
-             case 'I':
-                 return (numero % 2 != 0); // Gana si es impar
-             default:
-                 return false; // Por seguridad, si llega una letra extraña, pierde.
-         }
+            case 'N':
+                return !esRojo(numero); // recordar que "!" significa "NO". Gana si NO es rojo.
+            case 'P':
+                return (numero % 2 == 0); // Gana si es par
+            case 'I':
+                return (numero % 2 != 0); // Gana si es impar
+            default:
+                return false; // letra rara false
+        }
 
     }
-/**
- * Determina si un número corresponde a color rojo.
- * @param n número de la ruleta.
- * @return true si es rojo, false en caso contrario.
- */
-public static boolean esRojo(int n) {
-    for (int i = 0; i < numerosRojos.length; i++){
-        if (numerosRojos[i] == n);{
-            return true;
+
+    /**
+     * Determina si un número corresponde a color rojo.
+     *
+     * @param n número de la ruleta.
+     * @return true si es rojo, false en caso contrario.
+     */
+    public static boolean esRojo(int n) {
+        for (int i = 0; i < numerosRojos.length; i++) {
+            if (numerosRojos[i] == n) ;
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
+        // TODO: Guardar los datos sin superar MAX_HISTORIAL.
+        if (historialSize < MAX_HISTORIAL) {
+            historialNumeros[historialSize] = numero;
+            historialApuestas[historialSize] = apuesta;
+            historialAciertos[historialSize] = acierto;
+
+            historialSize++;
+        } else {
+            System.out.println("El historial está lleno, no ya no se registraran resultados...");
         }
     }
-    return false;
-}
-    /**
-     * Registra los resultados de la ronda en los arreglos
-     * de historial.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param apuesta monto apostado.
-     * @param acierto si el jugador acertó o no.
-     */
-    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
-// TODO: Guardar los datos sin superar MAX_HISTORIAL.
-    }
-    /**
-     * Muestra en consola el resultado de la ronda.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param tipo tipo de apuesta realizada.
-     * @param monto monto apostado.
-     * @param acierto si el jugador ganó o perdió.
-     */
-    public static void mostrarResultado(int numero, char tipo, int monto, boolean
-            acierto) {
-// TODO: Mostrar los datos y el resultado de la ronda.
-    }
-    /**
-     * Muestra estadísticas generales de todas las
-     * rondas jugadas.
-     */
+
+
+/**
+ * Muestra en consola el resultado de la ronda.
+ *
+ * @param numero  número obtenido en la ruleta.
+ * @param tipo    tipo de apuesta realizada.
+ * @param monto   monto apostado.
+ * @param acierto si el jugador ganó o perdió.
+ */
+   public static void mostrarResultado(int numero, char tipo, int monto, boolean
+        acierto) {
+
+
+   }
+
+
+    // TODO: Mostrar los datos y el resultado de la ronda.
+
+
+/**
+ * Muestra estadísticas generales de todas las
+ * rondas jugadas.
+ */
     public static void mostrarEstadisticas() {
 // TODO: Calcular y mostrar las estadísticas acumuladas.
-    }
+    System.out.println("Mostrando estadisticas actuales...");
+}
+
 }
