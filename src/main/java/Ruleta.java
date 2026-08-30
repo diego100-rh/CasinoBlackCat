@@ -64,19 +64,41 @@ public class Ruleta {
         }
     }
 
-    public static void iniciarRonda(Scanner in) {
-        System.out.println("\n Ronda selccionada preparando... ");
-        char apuestaelegida = leerTipoApuesta(in);
-        System.out.print("Ingrese el monto de la apuesta $: ");
-        int montoApostado = in.nextInt();
-        in.nextLine();
-        int numeroganador = girarRuleta();
-        boolean posiblevictoria = evaluarResultado(numeroganador, apuestaelegida);
+    public static int leerMontoApostado(Scanner in) {
+        int monto =  0;
+        boolean esValido = false;
+        do {
+            System.out.print("Ingrese el monto de la apuesta $: ");
 
-        registrarResultado(numeroganador,apuestaelegida,posiblevictoria);
-        mostrarResultado(numeroganador,apuestaelegida,montoApostado, posiblevictoria );
-
+            if (in.hasNextInt()){
+                monto = in.nextInt();
+               if (monto > 0){
+                 esValido = true;
+               } else {
+                 System.out.println("Error: La apuesta debe ser mayor a $0.");
+               }
+            } else{
+            // Si escribió letras o símbolos, cae aquí y evitamos que el programa colapse
+            System.out.println("Error: Por favor ingrese solo números enteros.");
+            }
+            in.nextLine();
+        }while (!esValido);
+        return monto;
     }
+
+    public static void iniciarRonda(Scanner in) {
+        System.out.println("\n Ronda seleccionada preparando... ");
+
+        char apuestaElegida = leerTipoApuesta(in);
+        int montoApostado = leerMontoApostado(in); // Llamamos
+
+        int numeroGanador = girarRuleta();
+        boolean posibleVictoria = evaluarResultado(numeroGanador, apuestaElegida);
+
+        registrarResultado(numeroGanador, montoApostado, posibleVictoria);
+        mostrarResultado(numeroGanador, apuestaElegida, montoApostado, posibleVictoria);
+    }
+
     public static char leerTipoApuesta(Scanner in) {
         boolean esValido = false;
         char op = ' ';
@@ -96,7 +118,6 @@ public class Ruleta {
             in.nextLine();
             // leemos palabra, mayúscula, y extraemos la letra 0
             op = in.next().toUpperCase().charAt(0);
-
             if (op == 'R' || op == 'N' || op == 'P' || op == 'I') {
                 esValido = true;
                 System.out.println("Opción aceptada.");
@@ -165,16 +186,16 @@ public class Ruleta {
    public static void mostrarResultado(int numero, char tipo, int monto, boolean
         acierto) {
        {
-       System.out.println("\n===============================");
-       System.out.print(" -Mostrando Resultado de juego: ");
-       System.out.println("===============================");
-       System.out.println("La ruleta se detubo en el número: " + numero);
+       System.out.println("\n==============================");
+       System.out.print(" -Mostrando Resultado de juego:" + tipo);
+
+       System.out.println("\n La ruleta se detubo en el número: " + numero);
         if (acierto) {
             int premio = monto * 2;
-            System.out.println("SIIII HAS GANDO CON TU MONTO DE: " +monto+ "OPTUBISTE UN MONTO EXTRA DE:" + premio);
+            System.out.println("SIIII HAS GANDO CON TU MONTO DE: " +monto+ " OPTUBISTE UN MONTO EXTRA DE:" + premio);
         } else {
-            System.out.println("Lo siento tu aouesta" + monto + "fue rechazada");
-            System.out.println("Monto perdido: " +monto);
+            System.out.println("Lo siento tu apuesta de " + monto + " fue rechazada");
+            System.out.println("Monto perdido: -" +monto);
             }
         }
    }
