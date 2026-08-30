@@ -16,6 +16,8 @@ public class Ruleta {
 
     public static void main(String[] args) {
         menu();
+
+
     }
 
     public static void menu() {
@@ -62,12 +64,6 @@ public class Ruleta {
         }
     }
 
-    /**
-     * Inicia una ronda de la ruleta: leer apuesta, girar,
-     * evaluar y mostrar resultado.
-     *
-     * @param in Scanner para entrada por consola.
-     */
     public static void iniciarRonda(Scanner in) {
         System.out.println("\n Ronda selccionada preparando... ");
         char apuestaelegida = leerTipoApuesta(in);
@@ -81,22 +77,34 @@ public class Ruleta {
         mostrarResultado(numeroganador,apuestaelegida,montoApostado, posiblevictoria );
 
     }
-
     public static char leerTipoApuesta(Scanner in) {
-        System.out.println("==============================");
-        System.out.println("Seleccione apuesta");
-        System.out.println("\n'R' para Rojo.\n" +
-                "\n" +
-                "'N' para Negro.\n" +
-                "\n" +
-                "'P' para Par.\n" +
-                "\n" +
-                "'I' para Impar.");
-        System.out.println("==============================");
-        System.out.print(" Seleccione:");
-        // leemos palabra, mayúscula, y extraemos la letra 0
-        char op = in.next().toUpperCase().charAt(0);
-        in.nextLine();
+        boolean esValido = false;
+        char op = ' ';
+
+        do {
+            System.out.println("==============================");
+            System.out.println("Seleccione apuesta");
+            System.out.println("\n'R' para Rojo.\n" +
+                    "\n" +
+                    "'N' para Negro.\n" +
+                    "\n" +
+                    "'P' para Par.\n" +
+                    "\n" +
+                    "'I' para Impar.");
+            System.out.println("==============================");
+            System.out.print(" Seleccione:");
+            in.nextLine();
+            // leemos palabra, mayúscula, y extraemos la letra 0
+            op = in.next().toUpperCase().charAt(0);
+
+            if (op == 'R' || op == 'N' || op == 'P' || op == 'I') {
+                esValido = true;
+                System.out.println("Opción aceptada.");
+                return op;
+            } else {
+                System.out.println("Opción inválida. Intente nuevamente por favor.");
+            }
+        }while (!esValido);
         return op;
     }
 
@@ -121,15 +129,8 @@ public class Ruleta {
             default:
                 return false; // letra rara false
         }
-
     }
 
-    /**
-     * Determina si un número corresponde a color rojo.
-     *
-     * @param n número de la ruleta.
-     * @return true si es rojo, false en caso contrario.
-     */
     public static boolean esRojo(int n) {
         for (int i = 0; i < numerosRojos.length; i++) {
             if (numerosRojos[i] == n) ;
@@ -179,14 +180,20 @@ public class Ruleta {
    }
     // TODO: Mostrar los datos y el resultado de la ronda.
 
-
 /**
  * Muestra estadísticas generales de todas las
  * rondas jugadas.
  */
     public static void mostrarEstadisticas() {
 // TODO: Calcular y mostrar las estadísticas acumuladas.
-    System.out.println("Mostrando estadisticas actuales...");}
+
+    System.out.println("Mostrando estadisticas actuales...");
+    System.out.println("Estadisticas" +historialSize);
+
+    }
+
+
+
 
 
 }
