@@ -32,18 +32,36 @@ public class Ruleta {
     }
 
     public static void mostrarMenu() {
-        System.out.println("\n=== Bienveido al casino Black Cat ===");
-        System.out.println("    === Jugue con moderacion ===    ");
+         System.out.println("\n=== Bienveido al casino Black Cat ===");
+         System.out.println("    === Jugue con moderacion ===    ");
 
-        System.out.println("\n1. Iniciar juego");
-        System.out.println("2. Ver Estadisticas ");
-        System.out.println("3. Salir");
-        System.out.print("Elige una opción: ");
+         System.out.println("\n1. Iniciar juego");
+         System.out.println("2. Ver Estadisticas ");
+         System.out.println("3. Salir");
     }
 
     public static int leerOpcion(Scanner in) {
-        int opcion = in.nextInt();
-        in.nextLine();
+        int opcion = 0;
+        boolean esValido = false;
+
+        do {
+            System.out.print("Elige una opción: ");
+            // preventivo contra letras
+            if (in.hasNextInt()) {
+                opcion = in.nextInt();
+                // Validación (solo 1, 2 o 3)
+                if (opcion == 1 || opcion == 2 || opcion == 3) {
+                    esValido = true;
+                } else {
+                    System.out.println("Opción inválida. Ingrese 1, 2 o 3.");
+                }
+            } else {
+                System.out.println("Error: Ingrese solo números enteros.");
+            }
+            in.nextLine(); //cerramos
+
+        } while (!esValido);
+
         return opcion;
     }
 
@@ -114,14 +132,12 @@ public class Ruleta {
                     "\n" +
                     "'I' para Impar.");
             System.out.println("==============================");
-            System.out.print(" Seleccione:");
-            in.nextLine();
+            System.out.print(" Seleccione: ");
             // leemos palabra, mayúscula, y extraemos la letra 0
             op = in.next().toUpperCase().charAt(0);
             if (op == 'R' || op == 'N' || op == 'P' || op == 'I') {
                 esValido = true;
                 System.out.println("Opción aceptada.");
-                return op;
             } else {
                 System.out.println("Opción inválida. Intente nuevamente por favor.");
             }
@@ -169,7 +185,7 @@ public class Ruleta {
             historialApuestas[historialSize] = apuesta;
             historialAciertos[historialSize] = acierto;
 
-            historialSize++;
+          System.out.println(historialSize++);
         } else {
             System.out.println("El historial está lleno, no ya no se registraran resultados...");
         }
@@ -205,16 +221,34 @@ public class Ruleta {
  * Muestra estadísticas generales de todas las
  * rondas jugadas.
  */
-    public static void mostrarEstadisticas() {
-// TODO: Calcular y mostrar las estadísticas acumuladas.
+    public static void mostrarEstadisticas(){
 
-    System.out.println("Mostrando estadisticas actuales...");
-    System.out.println("Estadisticas" +historialSize);
+        System.out.println("Mostrando estadisticas actuales...");
+        if (historialSize == 0) {
+            System.out.println("Aún no hay jugadas registradas en esta sesión.");
+            return;
+        }
+        int victorias = 0;
+        int derrotas = 0;
+        int dineroUsado = 0;
 
+        for (int i = 0; i < historialSize; i++) {
+            dineroUsado = dineroUsado + historialApuestas[i];
+
+            if (historialAciertos[i]) {
+                victorias++;
+            } else {
+                derrotas++;
+            }
+            System.out.println("Total de rondas jugadas: " + historialSize);
+            System.out.println("Rondas ganadas: " + victorias);
+            System.out.println("Rondas perdidas: " + derrotas);
+            System.out.println("Dinero total apostado: $" + dineroUsado);
+        }
     }
 
 
 
-
-
 }
+
+
