@@ -215,12 +215,7 @@ public class Ruleta {
             }
         }
    }
-    // TODO: Mostrar los datos y el resultado de la ronda.
 
-/**
- * Muestra estadísticas generales de todas las
- * rondas jugadas.
- */
     public static void mostrarEstadisticas(){
 
         System.out.println("Mostrando estadisticas actuales...");
