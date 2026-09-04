@@ -35,7 +35,6 @@ public class VentanaRegistro {
             Usuario nuevoJugador = new Usuario(textouser, textpassword, textNombre);
             VentanaLogin.USUARIOS.add(nuevoJugador);
 
-
             JOptionPane.showMessageDialog(null, "Registro exitoso. Volviendo al menú principal.");
 
             //Volver a la ventana de inicio de sesión para ingresar con las nuevas credenciales

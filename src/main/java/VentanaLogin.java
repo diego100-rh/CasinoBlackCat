@@ -14,17 +14,20 @@ public class VentanaLogin {
     private final JPasswordField txtClave = new JPasswordField();
     private final JButton btnIngresar = new JButton("Ingresar");
 
+    //private final JButton btnRegistrar = new JButton("Registrarse");
+
     public VentanaLogin() {
         USUARIOS.add(new Usuario("admin","6767","Don Donnie"));
         USUARIOS.add(new Usuario("messi","goattt", "Messi"));
         frame.setSize(350, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra el programa en la "X"
-        frame.setLayout(new java.awt.GridLayout(3, 2, 15, 15)); // Cuadrícula de 3 filas y 2 columnas
+        frame.setLayout(new java.awt.GridLayout(4, 2, 15, 15)); // Cuadrícula de 3 filas y 2 columnas
         frame.add(lblUsuario);
         frame.add(txtUsuario);
         frame.add(lblClave);
         frame.add(txtClave);
-
+       // frame.add(btnRegistrar);
+        //btnRegistrar.addActionListener(e -> abrirRegistro());
         frame.add(new JLabel(""));
         frame.add(btnIngresar);
 
