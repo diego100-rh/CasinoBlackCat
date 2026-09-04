@@ -15,23 +15,28 @@ public class VentanaLogin {
     private final JPasswordField txtClave = new JPasswordField();
     private final JButton btnIngresar = new JButton("Ingresar");
 
-    /**
-     * Constructor que inicializa la ventana de inicio de sesión.
-     * Configura sus componentes y eventos.
-     */
     public VentanaLogin() {
-// TODO: Agregar los usuarios iniciales a la lista
-// TODO: Inicializar y configurar la ventana
+        USUARIOS.add(new Usuario("admin","6767","Don Donnie"));
+        USUARIOS.add(new Usuario("messi","goattt", "Messi"));
+        frame.setSize(350, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cierra el programa en la "X"
+        frame.setLayout(new java.awt.GridLayout(3, 2, 15, 15)); // Cuadrícula de 3 filas y 2 columnas
+        frame.add(lblUsuario);
+        frame.add(txtUsuario);
+        frame.add(lblClave);
+        frame.add(txtClave);
+
+        frame.add(new JLabel(""));
+        frame.add(btnIngresar);
+
+        btnIngresar.addActionListener(e -> login());
 
     }
-    /**
-     * Muestra la ventana en pantalla.
-     * Debe centrarla y hacerla visible.
-     */
     public void mostrarVentana() {
 // TODO: Centrar y mostrar la ventana
+
     }
-    private void login(Scanner esc) {
+    private void login() {
 
         String user = txtUsuario.getText();
         String password = new String(txtClave.getPassword());
