@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class VentanaLogin {
     // --- Lista dinámica de usuarios ---
-    public static final List USUARIOS = new ArrayList<>();
+    public static final List<Usuario> USUARIOS = new ArrayList<>();
     // --- Componentes de la interfaz gráfica ---
     private final JFrame frame = new JFrame("Login - Casino Black Cat");
     private final JLabel lblUsuario = new JLabel("Usuario:");
@@ -20,6 +22,7 @@ public class VentanaLogin {
     public VentanaLogin() {
 // TODO: Agregar los usuarios iniciales a la lista
 // TODO: Inicializar y configurar la ventana
+
     }
     /**
      * Muestra la ventana en pantalla.
@@ -40,16 +43,8 @@ public class VentanaLogin {
             JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas para: " + nombreJugador);
         }
     }
-    /**
-     * Valida las credenciales ingresadas utilizando la lista de usuarios.
-     *
-     * @param u nombre de usuario ingresado
-     * @param p contraseña ingresada
-     * @return el nombre del usuario si las credenciales son válidas o una cadena vacía
-    si no existe una coincidencia
-     */
     private String validarCredenciales(String u, String p) {
-// TODO: Recorrer la lista y validar las credenciales
+        // TODO: Recorrer la lista y validar las credenciales
        for (Usuario jugador : USUARIOS){
            if (jugador.validarCredenciales(u,p)){
                return jugador.getNombre();
@@ -57,12 +52,13 @@ public class VentanaLogin {
        }
      return "";
     }
-    /**
-     * Abre la ventana de registro para crear un nuevo usuario.
-     * Debe cerrar la ventana actual e invocar a VentanaRegistro.
-     */
+
     private void abrirRegistro() {
 // TODO: Cerrar la ventana actual y abrir la ventana de registro
+        frame.dispose();
+        VentanaRegistro ventanaReg = new VentanaRegistro();
+        ventanaReg.mostrarVentana();
+
     }
 
 }
