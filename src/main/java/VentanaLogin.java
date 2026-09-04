@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -33,7 +32,8 @@ public class VentanaLogin {
 
     }
     public void mostrarVentana() {
-// TODO: Centrar y mostrar la ventana
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
 
     }
     private void login() {
