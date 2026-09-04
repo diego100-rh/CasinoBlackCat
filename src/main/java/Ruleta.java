@@ -20,25 +20,25 @@ public class Ruleta {
 
     }
 
-    public static void menu() {
-        Scanner in = new Scanner(System.in);
-        int opcionElegida = 0;
-        do {
-            mostrarMenu();
-            opcionElegida = leerOpcion(in);
-            ejecutarOpcion(opcionElegida, in);
-        } while (opcionElegida != 3);
+//    public static void menu() {
+//        Scanner in = new Scanner(System.in);
+//        int opcionElegida = 0;
+//        do {
+//            mostrarMenu();
+//            opcionElegida = leerOpcion(in);
+//            ejecutarOpcion(opcionElegida, in);
+//        } while (opcionElegida != 3);
+//
+//    }
 
-    }
-
-    public static void mostrarMenu() {
-         System.out.println("\n=== Bienveido al casino Black Cat ===");
-         System.out.println("    === Jugue con moderacion ===    ");
-
-         System.out.println("\n1. Iniciar juego");
-         System.out.println("2. Ver Estadisticas ");
-         System.out.println("3. Salir");
-    }
+//    public static void mostrarMenu() {
+//         System.out.println("\n=== Bienveido al casino Black Cat ===");
+//         System.out.println("    === Jugue con moderacion ===    ");
+//
+//         System.out.println("\n1. Iniciar juego");
+//         System.out.println("2. Ver Estadisticas ");
+//         System.out.println("3. Salir");
+//    }
 
     public static int leerOpcion(Scanner in) {
         int opcion = 0;
