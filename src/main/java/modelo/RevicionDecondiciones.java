@@ -1,6 +1,6 @@
 package modelo;
 
-public class revicionDecondiciones {
+public class RevicionDecondiciones {
 
     // 1. Atributos privados (El estado de la clase)
     private final int MAX_HISTORIAL = 100; // Ajusta este número según tu requerimiento

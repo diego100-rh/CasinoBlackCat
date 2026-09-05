@@ -1,6 +1,6 @@
-package modelo;
+package vista;
 
-public class mostrarResultados {
+public class VistaResultados {
     public static void mostrarResultado(int numero, char tipo, int monto, boolean
             acierto) {
         {

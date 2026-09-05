@@ -9,11 +9,7 @@ public class Launcher {
          SwingUtilities.invokeLater(() -> {
              VentanaLogin menuInicio = new VentanaLogin();
              menuInicio.mostrarVentana();
-
-
          });
-
-
          }
 
     }
