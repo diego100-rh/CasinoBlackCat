@@ -9,18 +9,26 @@ public class RegistroResultado {
     private boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
     private int historialSize = 0;
 
-    // 2. Método lógico (Sin 'static' y sin 'System.out.println')
-    public boolean registrarResultado(int numero, int apuesta, boolean acierto) {
-        if (historialSize < MAX_HISTORIAL) {
-            historialNumeros[historialSize] = numero;
-            historialApuestas[historialSize] = apuesta;
-            historialAciertos[historialSize] = acierto;
-
-            historialSize++;
-            return true; // Indica que se guardó exitosamente
-        } else {
-            return false; // Indica que el historial está lleno
-        }
+    public int getHistorialSize() {
+        return historialSize;
     }
+    public int calcularVictoria() {
+        int victorias = 0;
+        for (int i = 0; i < historialSize; i++) {
+            if (historialAciertos[i]) {
+                victorias++;
+            }
+        }
+        return victorias;
+    }
+
+    public int calcularDineroGastado() {
+        int dinero = 0;
+        for (int i = 0; i < historialSize; i++) {
+            dinero = dinero + historialApuestas[i];
+        }
+        return dinero;
+    }
+
 }
 

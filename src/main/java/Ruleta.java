@@ -178,18 +178,18 @@ public class Ruleta {
 //        return false;
 //    }
 
-//    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
-//        // TODO: Guardar los datos sin superar MAX_HISTORIAL.
-//        if (historialSize < MAX_HISTORIAL) {
-//            historialNumeros[historialSize] = numero;
-//            historialApuestas[historialSize] = apuesta;
-//            historialAciertos[historialSize] = acierto;
-//
-//          System.out.println(historialSize++);
-//        } else {
-//            System.out.println("El historial está lleno, no ya no se registraran resultados...");
-//        }
-//    }
+    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
+        // TODO: Guardar los datos sin superar MAX_HISTORIAL.
+        if (historialSize < MAX_HISTORIAL) {
+            historialNumeros[historialSize] = numero;
+            historialApuestas[historialSize] = apuesta;
+            historialAciertos[historialSize] = acierto;
+
+          System.out.println(historialSize++);
+        } else {
+            System.out.println("El historial está lleno, no ya no se registraran resultados...");
+        }
+    }
 
 /**
  * Muestra en consola el resultado de la ronda.
