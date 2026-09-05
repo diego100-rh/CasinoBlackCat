@@ -12,12 +12,12 @@ public class VistaConsola {
             return;
         }
 
-        int victroias =  historial.calcularVictoria();
-        int derrotas = historial.getHistorialSize() - victroias;
+        int victorias =  historial.calcularVictoria();
+        int derrotas = historial.getHistorialSize() - victorias;
         int dineroUsado = historial.calcularDineroGastado();
 
         System.out.println("Total de rondas jugadas: " + historial.getHistorialSize());
-        System.out.println("Rondas ganadas: " + victroias);
+        System.out.println("Rondas ganadas: " + victorias);
         System.out.println("Rondas perdidas: " + derrotas);
         System.out.println("Dinero total apostado: $" + dineroUsado);
 
