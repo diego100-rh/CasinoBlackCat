@@ -33,6 +33,24 @@ public class VentanaLogin {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    private void login() {
+        String user = txtUsuario.getText();
+        String password = new String(txtClave.getPassword());
+
+        // Delegamos la validación matemática al modelo
+        String nombreJugador = gestor.validarCredenciales(user, password);
+
+        if (!nombreJugador.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + nombreJugador);
+            frame.dispose(); // Destruye la ventana de login
+
+            // Lanza el motor principal del menú en consola
+            ControladorDeJuego motor = new ControladorDeJuego();
+            motor.arrancarMenu();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
+        }
+    }
 
 
 
