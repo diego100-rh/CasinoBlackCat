@@ -11,7 +11,7 @@ public class inciarRondas {
         int numeroGanador = MecanismoRuleta.girarRuleta();
         boolean posibleVictoria = EvaluadorApuesta.evaluarResultado(numeroGanador,apuestaElegida);
 
-        RegistroResultado registro = new RegistroResultado();
-        registro.registrarResultado(numeroGanador, montoApostado, posibleVictoria);
+        validarHistorial registro = new validarHistorial();
+        registro.registraResultado(numeroGanador, montoApostado, posibleVictoria);
     }
 }

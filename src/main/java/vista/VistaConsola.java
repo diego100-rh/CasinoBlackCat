@@ -1,9 +1,9 @@
 package vista;
 
-import modelo.RegistroResultado;
+import modelo.revicionDecondiciones;
 
 public class VistaConsola {
-    public void mostrarEstadisticas(RegistroResultado historial){
+    public void mostrarEstadisticas(revicionDecondiciones historial){
         System.out.println("Mostrando estadisticas nuevas...");
 
         if (historial.getHistorialSize() == 0){
