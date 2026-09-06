@@ -1,9 +1,13 @@
 package vista;
 import javax.swing.*;
 import java.awt.*;
+
+import modelo.GestorUsuario;
 import modelo.Usuario;
 
 public class VentanaRegistro {
+    private GestorUsuario gestor;
+
     public void mostrarVentana(){
 
         JFrame ventana = new JFrame("Casino BlackCat - Menú Principal");
@@ -30,15 +34,9 @@ public class VentanaRegistro {
             String textouser = cajauser.getText().trim();
             String textpassword = cajacontraseña.getText().trim();
 
-            if (textNombre.isEmpty() || textouser.isEmpty() || textpassword.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Error: Todos los campos son obligatorios.");
-                return; // Abortamos el guardado si hay vacíos
-            }
-            Usuario nuevoJugador = new Usuario(textouser, textpassword, textNombre);
-            VentanaLogin.USUARIOS.add(nuevoJugador);
-
-            JOptionPane.showMessageDialog(null, "Registro exitoso. Volviendo al menú principal.");
-
+            Usuario nuevojugador = new Usuario(textouser,textpassword,textNombre);
+            gestor.registrarUsuario(nuevojugador);
+            JOptionPane.showMessageDialog(null, "Registro exitoso.");
             //Volver a la ventana de inicio de sesión para ingresar con las nuevas credenciales
             ventana.dispose(); // Destruye la ventana de registro
             VentanaLogin ventanaLog = new VentanaLogin();

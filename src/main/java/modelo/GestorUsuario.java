@@ -1,6 +1,7 @@
 package modelo;
 import java.util.List;
 import java.util.ArrayList;
+
 public class GestorUsuario {
     private final List<Usuario> usuarios = new ArrayList<>();
 
@@ -17,7 +18,9 @@ public class GestorUsuario {
             }
         }
         return "";
-
+    }
+    public void registrarUsuario(Usuario nuevo) {
+        usuarios.add(nuevo);
     }
 
 }
