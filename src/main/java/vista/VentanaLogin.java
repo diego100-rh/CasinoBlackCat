@@ -1,10 +1,9 @@
 package vista;
 
 import javax.swing.*;
+
 import modelo.GestorUsuario;
 import launcher.ControladorDeJuego;
-
-import java.awt.*;
 
 public class VentanaLogin {
     private GestorUsuario gestor;
@@ -20,7 +19,7 @@ public class VentanaLogin {
         configurarVentana();
 
     }
-    public void VentanaLogin() {
+    public VentanaLogin() {
        this.gestor = new GestorUsuario();
        configurarVentana();
     }
@@ -40,12 +39,25 @@ public class VentanaLogin {
         frame.add(btnIngresar);
 
         frame.add(btnRegistrar);
-        btnIngresar.addActionListener(e -> login());
+        btnIngresar.addActionListener(e ->login());
 
         }
+      public void login() {
+          String user = txtUsuario.getText();
+           String password = new String(txtClave.getPassword());
+
+    // Delegamos la validación matemática al modelo
+          String nombreJugador = gestor.validarCredenciales(user, password);
+
+          if (!nombreJugador.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + nombreJugador);
+             frame.dispose(); // Destruye la ventana de login
+
+        // Lanza el motor principal del menú en consola
+              ControladorDeJuego motor = new ControladorDeJuego();
+              motor.arrancarMenu();
+          } else {
+             JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
+             }
+      }
     }
-
-
-
-
-}
