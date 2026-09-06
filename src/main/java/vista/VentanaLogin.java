@@ -17,12 +17,17 @@ public class VentanaLogin {
     public VentanaLogin(GestorUsuario gestorExistente){
         this.gestor = gestorExistente;
         configurarVentana();
-
     }
     public VentanaLogin() {
        this.gestor = new GestorUsuario();
        configurarVentana();
     }
+
+    public void mostrarVentana() {
+        frame.setLocationRelativeTo(null); // Centra la ventana exactamente en medio de la pantalla
+        frame.setVisible(true);            // La dibuja y la hace visible
+    }
+
     private void configurarVentana() {
         frame.setSize(350,200); // (ancho x alto)
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,6 +45,11 @@ public class VentanaLogin {
 
         frame.add(btnRegistrar);
         btnIngresar.addActionListener(e ->login());
+        btnRegistrar.addActionListener(actionEvent -> {
+            frame.dispose();// matar la ventana login actual
+            VentanaRegistro ventanaReg = new VentanaRegistro();
+            ventanaReg.mostrarVentana(this.gestor);// Abre el registro compartiendo la base de datos
+        });
 
         }
       public void login() {
@@ -60,4 +70,4 @@ public class VentanaLogin {
              JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
              }
       }
-    }
+}

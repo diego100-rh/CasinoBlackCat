@@ -25,6 +25,9 @@ public class Tipodeapuesta {
             if (op == 'R' || op == 'N' || op == 'P' || op == 'I') {
                 esValido = true;
                 System.out.println("Opción aceptada.");
+                MecanismoRuleta ruleta = new MecanismoRuleta();
+                ruleta.girarRuleta();
+
             } else {
                 System.out.println("Opción inválida. Intente nuevamente por favor.");
             }

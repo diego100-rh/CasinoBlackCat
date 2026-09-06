@@ -8,7 +8,8 @@ import modelo.Usuario;
 public class VentanaRegistro {
     private GestorUsuario gestor;
 
-    public void mostrarVentana(){
+    public void mostrarVentana(GestorUsuario gestorCompartido){
+        this.gestor = gestorCompartido;
 
         JFrame ventana = new JFrame("Casino BlackCat - Menú Principal");
         ventana.setSize(300, 350);
@@ -39,7 +40,7 @@ public class VentanaRegistro {
             JOptionPane.showMessageDialog(null, "Registro exitoso.");
             //Volver a la ventana de inicio de sesión para ingresar con las nuevas credenciales
             ventana.dispose(); // Destruye la ventana de registro
-            VentanaLogin ventanaLog = new VentanaLogin();
+            VentanaLogin ventanaLog = new VentanaLogin(this.gestor);
             ventanaLog.mostrarVentana();
 
         });

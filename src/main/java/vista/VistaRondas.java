@@ -5,7 +5,8 @@ import modelo.*;
 import java.util.Scanner;
 
 public class VistaRondas {
-    public static void iniciarRonda(Scanner in) {
+
+    public static void iniciarRonda(Scanner in, RevicionDecondiciones memoriaMaestra) {
         System.out.println("\n Ronda seleccionada preparando... ");
 
         char apuestaElegida = Tipodeapuesta.leerTipoApuesta(in);
@@ -13,7 +14,8 @@ public class VistaRondas {
         int numeroGanador = MecanismoRuleta.girarRuleta();
         boolean posibleVictoria = EvaluadorApuesta.evaluarResultado(numeroGanador,apuestaElegida);
 
-        validarHistorial registro = new validarHistorial();
-        registro.registraResultado(numeroGanador, montoApostado, posibleVictoria);
+        memoriaMaestra.registraResultado(numeroGanador,montoApostado,posibleVictoria);
+        VistaResultados pantallaResultados = new VistaResultados();
+        pantallaResultados.mostrarResultado(numeroGanador,apuestaElegida,montoApostado,posibleVictoria);
     }
 }

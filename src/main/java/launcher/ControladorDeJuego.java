@@ -26,7 +26,7 @@ public class ControladorDeJuego {
             switch (op){
                 case 1:
                     System.out.println("Iniciando...");
-                    jugar.iniciarRonda(lec);
+                    jugar.iniciarRonda(lec, memoria);
                     break;
 
                 case 2:
