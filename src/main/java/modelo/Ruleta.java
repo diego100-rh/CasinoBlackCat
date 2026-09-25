@@ -43,7 +43,7 @@ public class Ruleta {
     }
     public boolean esRojo(int n) {
         for (int i = 0; i < numerosRojos.length; i++) {
-            if (numerosRojos[i] == n) ;
+            if (numerosRojos[i] == n)
             {
                 return true;
             }
