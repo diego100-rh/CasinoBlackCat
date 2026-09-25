@@ -47,10 +47,11 @@ public class VentanaLogin {
         btnRegistrar.addActionListener(actionEvent -> {
             frame.dispose();// matar la ventana login actual
             VentanaRegistro ventanaReg = new VentanaRegistro();
-            ventanaReg.mostrarVentana(this.gestor);// Abre el registro compartiendo la base de datos
+            ventanaReg.mostrarVentana(gestor);// Abre el registro compartiendo la base de datos
         });
 
         }
+
       public void login() {
           String user = txtUsuario.getText();
            String password = new String(txtClave.getPassword());
@@ -67,4 +68,5 @@ public class VentanaLogin {
              JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
              }
       }
+
 }
