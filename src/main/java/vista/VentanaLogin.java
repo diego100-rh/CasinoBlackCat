@@ -3,7 +3,6 @@ package vista;
 import javax.swing.*;
 
 import modelo.GestorUsuario;
-import launcher.ControladorDeJuego;
 
 public class VentanaLogin {
     private GestorUsuario gestor;
@@ -64,8 +63,8 @@ public class VentanaLogin {
              frame.dispose(); // Destruye la ventana de login
 
         // Lanza el motor principal del menú en consola
-              ControladorDeJuego motor = new ControladorDeJuego();
-              motor.arrancarMenu();
+              VentanaMenu motor = new VentanaMenu(nombreJugador);
+              motor.configurarVentana();
           } else {
              JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
              }
