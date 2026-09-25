@@ -1,12 +1,16 @@
 package vista;
+import modelo.Ruleta;
+
 import javax.swing.*;
 
 public class VentanaMenu {
     private JFrame frame;
     private String nombreJugador;
+    private Ruleta motorCentral;
 
     public VentanaMenu(String nombreJugador) {
         this.nombreJugador = nombreJugador;
+        this.motorCentral = new Ruleta();
         configurarVentana();
     }
 
@@ -44,6 +48,11 @@ public class VentanaMenu {
         btnJugar.addActionListener(e -> {
             VentanaRuleta ruleta = new VentanaRuleta();
             ruleta.mostrarVentana();
+        });
+        // Al botón historial le pasas el mismo motor
+        btnHistorial.addActionListener(e -> {
+            VistaHistorial historial = new VistaHistorial(nombreJugador, motorCentral);
+            historial.mostrarVentana();
         });
         btnHistorial.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Abriendo estadísticas... (En construcción)"));
     }
