@@ -15,13 +15,10 @@ public class Ruleta {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
             19, 21, 23, 25, 27, 30, 32, 34, 36
     };
-
     public int girarRuleta() {
         // Genera y retorna un número aleatorio entre 0 y 36
         return rng.nextInt(CANTIDAD_NUMEROS);
     }
-
-
     public int getHistorialSize() {
         return historialSize;
     }
@@ -82,18 +79,6 @@ public class Ruleta {
             }
         }
         return victorias;
-    }
-
-    public boolean registraResultado(int numero, int apuesta, boolean acierto){
-        if (historialSize < MAX_HISTORIAL) {
-            historialNumeros[historialSize] = numero;
-            historialApuestas[historialSize] = apuesta;
-            historialAciertos[historialSize] = acierto;
-            historialSize++;
-            return true;
-        }
-        return false;
-        //pude ser un msj pero daremos un valor falso
     }
 }
 

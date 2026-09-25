@@ -6,8 +6,8 @@ public class VentanaRuleta {
     private JFrame frame;
     private Ruleta motorRuleta; // Conexión directa con tu lógica matemática
 
-    public VentanaRuleta() {
-        motorRuleta = new Ruleta(); // Instanciamos el motor al abrir la ventana
+    public VentanaRuleta(Ruleta motorCompartido) {
+        this.motorRuleta = motorCompartido; // Instanciamos el motor al abrir la ventana
         configurarVentana();
     }
 
@@ -53,7 +53,6 @@ public class VentanaRuleta {
                     JOptionPane.showMessageDialog(frame, "El monto de la apuesta debe ser mayor a $0.");
                     return;
                 }
-
                 // Extraemos la primera letra de la opción elegida en el menú desplegable (R, N, P, I)
                 char tipoApuesta = comboApuesta.getSelectedItem().toString().charAt(0);
 

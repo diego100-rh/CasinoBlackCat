@@ -61,7 +61,6 @@ public class VentanaLogin {
           if (!nombreJugador.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + nombreJugador);
              frame.dispose(); // Destruye la ventana de login
-              // Lanza el motor principal del menú
               VentanaMenu menu = new VentanaMenu(nombreJugador);
               menu.mostrarVentana();
           } else {

@@ -46,7 +46,7 @@ public class VentanaMenu {
 
         // Acciones temporales para conectar en el siguiente paso
         btnJugar.addActionListener(e -> {
-            VentanaRuleta ruleta = new VentanaRuleta();
+            VentanaRuleta ruleta = new VentanaRuleta(motorCentral);
             ruleta.mostrarVentana();
         });
         // Al botón historial le pasas el mismo motor
@@ -54,7 +54,6 @@ public class VentanaMenu {
             VistaHistorial historial = new VistaHistorial(nombreJugador, motorCentral);
             historial.mostrarVentana();
         });
-        btnHistorial.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Abriendo estadísticas... (En construcción)"));
     }
 
     public void mostrarVentana() {
