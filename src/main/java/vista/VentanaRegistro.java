@@ -16,7 +16,7 @@ public class VentanaRegistro {
             // Usamos DISPOSE_ON_CLOSE para que si cierran esta ventana con la X, no se apague todo el programa
             ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-            // Ajustamos la cuadrícula a 8 filas y 1 columna para que quepan todos tus elementos con holgura
+            // Ajustamos la cuadrícula a 8 filas y 1 columna para que quepan todos los elementos
             ventana.setLayout(new GridLayout(8, 1, 10, 10));
 
             JLabel titulo = new JLabel("Bienvenido", SwingConstants.CENTER);
@@ -39,7 +39,7 @@ public class VentanaRegistro {
             ventana.add(btnregistro);
 
             btnregistro.addActionListener(e -> {
-                // Tu lógica original de captura de datos
+                //captura de datos
                 String textNombre = cajaNombre.getText().trim();
                 String textouser = cajauser.getText().trim();
                 String textpassword = cajacontraseña.getText().trim();
@@ -53,15 +53,18 @@ public class VentanaRegistro {
                 Usuario nuevojugador = new Usuario(textouser, textpassword, textNombre);
                 gestor.registrarUsuario(nuevojugador);
 
-                JOptionPane.showMessageDialog(null, "Registro exitoso.");
+                JOptionPane.showMessageDialog(null, "Registro exitoso...");
+
+                VentanaMenu menu = new VentanaMenu(textouser);
+                menu.mostrarVentana();
                 ventana.dispose(); // Destruye la ventana de registro
 
-                // Vuelve a abrir el login con la base de datos actualizada
-                VentanaLogin ventanaLog = new VentanaLogin(this.gestor);
-                ventanaLog.mostrarVentana();
+//                // Vuelve a abrir el login con la base de datos actualizada
+//                VentanaLogin ventanaLog = new VentanaLogin(this.gestor);
+//                ventanaLog.mostrarVentana();
             });
 
-            // Estas dos instrucciones finales son obligatorias para que la ventana aparezca en el centro de tu monitor
+            // Estas dos instrucciones finales son obligatorias para que la ventana aparezca en el centro de la pantalla
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
 

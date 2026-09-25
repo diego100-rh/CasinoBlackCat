@@ -8,7 +8,7 @@ public class GestorUsuario {
     public GestorUsuario(){
         usuarios.add(new Usuario("admin","676767","Don Donnie"));
         usuarios.add(new Usuario("diego","lia","Diego Rifo"));
-        usuarios.add(new Usuario("lia", "pollo", "lia"));
+        usuarios.add(new Usuario("lia", "pollo", "lia Rifo"));
     }
 
     public String validarCredenciales(String a, String b){
