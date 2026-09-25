@@ -2,7 +2,6 @@ package launcher;
 import vista.VistaEstadisticas;
 import vista.VistaMenuGeneral;
 import vista.VistaRondas;
-import modelo.RevicionDecondiciones;
 
 import java.util.Scanner;
 

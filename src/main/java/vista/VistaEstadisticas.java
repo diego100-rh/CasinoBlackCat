@@ -1,7 +1,5 @@
 package vista;
 
-import modelo.RevicionDecondiciones;
-
 public class VistaEstadisticas {
     public void mostrarEstadisticas(RevicionDecondiciones historial){
         System.out.println("Mostrando estadisticas nuevas...");
