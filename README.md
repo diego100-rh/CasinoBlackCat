@@ -1,4 +1,4 @@
-Trabajo compeltado, separacion de responsabilidades, la clase ruleta controla el primer juego
+Trabajo completado, separacion de responsabilidades, la clase ruleta controla el primer juego
 (me refiero a que es reutilizable a futuro si necesitamos otro juego mas)
 
 Primeras pruebas unitarias con JUnit 5.8.1' revicion de logica de juego en Ruleta.java
