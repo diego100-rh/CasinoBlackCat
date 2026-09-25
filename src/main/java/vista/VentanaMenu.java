@@ -41,7 +41,10 @@ public class VentanaMenu {
         });
 
         // Acciones temporales para conectar en el siguiente paso
-        btnJugar.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Abriendo ruleta... (En construcción)"));
+        btnJugar.addActionListener(e -> {
+            VentanaRuleta ruleta = new VentanaRuleta();
+            ruleta.mostrarVentana();
+        });
         btnHistorial.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Abriendo estadísticas... (En construcción)"));
     }
 
