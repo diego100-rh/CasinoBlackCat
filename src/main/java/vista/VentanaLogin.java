@@ -3,6 +3,7 @@ package vista;
 import javax.swing.*;
 
 import modelo.GestorUsuario;
+import modelo.Usuario;
 
 public class VentanaLogin {
     private GestorUsuario gestor;
@@ -56,17 +57,17 @@ public class VentanaLogin {
           String user = txtUsuario.getText();
            String password = new String(txtClave.getPassword());
 
-    // Delegamos la validación matemática al modelo
-          String nombreJugador = gestor.validarCredenciales(user, password);
+          // Asumiendo que validarCredenciales ahora devuelve un objeto Usuario (o null si falla)
+          Usuario usuarioLogueado = gestor.validarCredenciales(user, password);
 
-          if (!nombreJugador.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + nombreJugador);
-             frame.dispose(); // Destruye la ventana de login
-              VentanaMenu menu = new VentanaMenu(nombreJugador);
+          if (usuarioLogueado != null) {
+              JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + usuarioLogueado.getNombre());
+              frame.dispose();
+              VentanaMenu menu = new VentanaMenu(usuarioLogueado); // Pasamos el objeto completo
               menu.mostrarVentana();
           } else {
-             JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
-             }
+              JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
+          }
       }
 
 }

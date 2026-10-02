@@ -1,11 +1,12 @@
 package vista;
 import modelo.Ruleta;
 import javax.swing.*;
+import modelo.TipoApuesta;
 
 public class VentanaRuleta {
     private JFrame frame;
-    private Ruleta motorRuleta; // Conexión directa con tu lógica matemática
-
+    private Ruleta motorRuleta;// Conexión directa con tu lógica matemática
+    private TipoApuesta evaluarTipoApuesta;
     public VentanaRuleta(Ruleta motorCompartido) {
         this.motorRuleta = motorCompartido; // Instanciamos el motor al abrir la ventana
         configurarVentana();
@@ -53,14 +54,24 @@ public class VentanaRuleta {
                     JOptionPane.showMessageDialog(frame, "El monto de la apuesta debe ser mayor a $0.");
                     return;
                 }
-                // Extraemos la primera letra de la opción elegida en el menú desplegable (R, N, P, I)
-                char tipoApuesta = comboApuesta.getSelectedItem().toString().charAt(0);
+                // Extraemos la primera letra de la opción elegida y la pasamos a mayúscula
+                char letra = comboApuesta.getSelectedItem().toString().toUpperCase().charAt(0);
+                TipoApuesta tipoSeleccionado;
+
+                 // Mapeamos letra a nuestro Enum
+                switch (letra) {
+                    case 'R' -> tipoSeleccionado = TipoApuesta.ROJO;
+                    case 'N' -> tipoSeleccionado = TipoApuesta.NEGRO;
+                    case 'P' -> tipoSeleccionado = TipoApuesta.PAR;
+                    case 'I' -> tipoSeleccionado = TipoApuesta.IMPAR;
+                    default -> throw new IllegalStateException("Apuesta no válida: " + letra);
+                }
 
                 // 1. Delegamos el giro a la clase Ruleta
                 int numeroGanador = motorRuleta.girarRuleta();
 
-                // 2. Delegamos la evaluación matemática
-                boolean victoria = motorRuleta.evaluarResultado(numeroGanador, tipoApuesta);
+                  // 2. Delegamos la evaluación matemática
+                boolean victoria = tipoSeleccionado.evaluarResultado(numeroGanador, tipoSeleccionado);
 
                 // 3. Delegamos el registro estadístico
                 motorRuleta.registrarResultado(numeroGanador, monto, victoria);

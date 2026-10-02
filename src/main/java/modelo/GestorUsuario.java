@@ -9,15 +9,17 @@ public class GestorUsuario {
         usuarios.add(new Usuario("admin","676767","Don Donnie"));
         usuarios.add(new Usuario("diego","lia","Diego Rifo"));
         usuarios.add(new Usuario("lia", "pollo", "lia Rifo"));
+
     }
 
-    public String validarCredenciales(String a, String b){
-        for(Usuario jugadores: usuarios){
-            if (jugadores.validarCredenciales(a,b)){
-                return jugadores.getNombre();
+    public Usuario validarCredenciales(String a, String b){
+        for (Usuario u : usuarios) {
+            // Llama al método de la clase Usuario para verificar
+            if (u.validarCredenciales(a, b)) {
+                return u; // Retorna el objeto Usuario si hay coincidencia
             }
         }
-        return "";
+        return null;
     }
     public void registrarUsuario(Usuario nuevo) {
         usuarios.add(nuevo);

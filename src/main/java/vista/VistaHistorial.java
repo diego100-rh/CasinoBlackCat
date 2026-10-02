@@ -1,20 +1,20 @@
 package vista;
 import modelo.Ruleta;
+import modelo.Usuario;
 
 import javax.swing.*;
 
 public class VistaHistorial {
     private JFrame frame;
     private Ruleta motorRuleta;
-    private String nombreJugador;
     // El constructor ahora exige recibir el motor que ya tiene los datos, para no crear uno NEW DESDE 0
-    public VistaHistorial(String nombreJugador, Ruleta motorOriginal){
+    public VistaHistorial(Usuario usuarioActual, Ruleta motorOriginal){
         this.motorRuleta=motorOriginal;
-        configurarVentanaHistorial(nombreJugador);
+        configurarVentanaHistorial(usuarioActual);
 
     }
 
-    public void configurarVentanaHistorial(String nombreJugador){
+    public void configurarVentanaHistorial(Usuario nombreJugador){
         frame = new JFrame("Ruleta - Historial ");
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -7,6 +7,7 @@ import modelo.Usuario;
 
 public class VentanaRegistro {
     private GestorUsuario gestor;
+    private Usuario usuarioActual;
 
     public void mostrarVentana(GestorUsuario gestorCompartido){
             this.gestor = gestorCompartido;
@@ -55,7 +56,7 @@ public class VentanaRegistro {
 
                 JOptionPane.showMessageDialog(null, "Registro exitoso...");
 
-                VentanaMenu menu = new VentanaMenu(textouser);
+                VentanaMenu menu = new VentanaMenu(usuarioActual);
                 menu.mostrarVentana();
                 ventana.dispose(); // Destruye la ventana de registro
 
