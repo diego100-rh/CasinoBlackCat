@@ -3,6 +3,7 @@ import modelo.Usuario;
 
 public class SessionController {
     private Usuario usuarioActual;
+
     public SessionController(Usuario usuario) {
         this.usuarioActual = usuario;
     }
@@ -20,6 +21,11 @@ public class SessionController {
         return this.usuarioActual.getSaldo();
     }
 
+    public int recargarSaldo(int montoRecarga){
+        return this.usuarioActual.depositar(montoRecarga);
+
+    }
+
     public String getNombreUsuario() {
         return this.usuarioActual.getNombre();
     }
@@ -33,7 +39,11 @@ public class SessionController {
     public void pagarPremio(int montoGanado) {
         this.usuarioActual.depositar(montoGanado);
     }
-
-
+    public void actualizarNombreUsuario(String nuevoNombre) {
+        // Validamos que no envíen un texto vacío antes de molestar al Modelo
+        if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
+            this.usuarioActual.setNombre(nuevoNombre);
+        }
+    }
 
 }

@@ -7,9 +7,6 @@ import javax.swing.*;
 
 public class VistaPerfil {
     private Usuario usuarioActual;
-    private final JButton btnfconfirmar = new JButton("Confirmar $");
-    private final JPasswordField txtmontoNv = new JPasswordField(); // Nota: Usualmente los montos no se ocultan con JPasswordField, un JTextField es mejor a menos que sea un PIN.
-
 
     public VistaPerfil(Usuario usuario) {
         this.usuarioActual = usuario;
@@ -45,30 +42,40 @@ public class VistaPerfil {
         JLabel lblslado = new JLabel("Saldo: " + controlador.getSaldoUsuario());
 
         btnmodificar.addActionListener(e -> {
-            //captura de datos
-            String textNombre = cajaNombrenv.getText().trim();
-            String textosaldo = cajasaldonv.getText().trim();
+            // 1. PROCESAR CAMBIO DE NOMBRE
+            // Leemos directamente de TU caja de texto
+            String nuevoNombre = cajaNombrenv.getText().trim();
 
-            // Validar que no envíen campos vacíos
-            if (textNombre.isEmpty() || textosaldo.isEmpty()){
-                JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
-                return;
+            if (!nuevoNombre.isEmpty()) {
+                controlador.actualizarNombreUsuario(nuevoNombre);
+                JOptionPane.showMessageDialog(frame, "Nombre actualizado con éxito a: " + nuevoNombre);
+
+                // Limpiamos tu caja de texto
+                cajaNombrenv.setText("");
             }
-             try {
-                 // Convertimos el texto del saldo a un número entero
-                 int monto = Integer.parseInt(textosaldo);
 
-                 controlador.gestionarRecargaYPerfil(textNombre, monto);
+            // 2. PROCESAR RECARGA DE SALDO
+            // Leemos directamente caja de texto para el saldo
+            String textoMonto = cajasaldonv.getText().trim();
 
-                 // 5. Actualizamos el JLabel para que el usuario vea el cambio
-                 lblslado.setText("Saldo: " + controlador.getSaldoUsuario());
-                 JOptionPane.showMessageDialog(frame, "Perfil actualizado correctamente.");
+            if (!textoMonto.isEmpty()) {
+                try {
+                    int montoRecarga = Integer.parseInt(textoMonto);
+                    if (montoRecarga > 0) {
+                        // Delegamos la recarga al controlador
+                        controlador.recargarSaldo(montoRecarga);
+                        JOptionPane.showMessageDialog(frame, "Recarga exitosa. Nuevo saldo: $" + controlador.getSaldoUsuario());
 
-             } catch (NumberFormatException ex) {
-            // atrapa el error si el usuario escribe letras en la caja de saldo
-                 JOptionPane.showMessageDialog(frame, "Error: El saldo debe ser un número válido.");
+                        // Limpiamos tu caja de texto
+                        cajasaldonv.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "El monto a recargar debe ser mayor a 0.");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Error: Ingrese un monto numérico válido.");
+                }
+            }
 
-             }
         });
 
         frame.setVisible(true);

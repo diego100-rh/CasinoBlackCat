@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class VistaHistorial {
     private JFrame frame;
+    private Usuario usuarioActual;
     private Ruleta motorRuleta;
     // El constructor ahora exige recibir el motor que ya tiene los datos, para no crear uno NEW DESDE 0
     public VistaHistorial(Usuario usuarioActual, Ruleta motorOriginal){
@@ -14,7 +15,7 @@ public class VistaHistorial {
 
     }
 
-    public void configurarVentanaHistorial(Usuario nombreJugador){
+    public void configurarVentanaHistorial(Usuario usuarioActual){
         frame = new JFrame("Ruleta - Historial ");
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -33,7 +34,7 @@ public class VistaHistorial {
         int victoria = motorRuleta.calcularVictoria();
         int dinero = motorRuleta.calcularDineroGastado();
 
-        String textoEstadisticas = "Usuario: " + nombreJugador + "\n"
+        String textoEstadisticas = "Usuario: " + usuarioActual.getNombre()+ "\n"
                 + "-----------------------------------\n"
                 + "Partidas jugadas: " + partidas + "\n"
                 + "Victorias obtenidas: " + victoria + "\n"
