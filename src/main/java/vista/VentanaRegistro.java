@@ -1,13 +1,12 @@
 package vista;
 import javax.swing.*;
 import java.awt.*;
-
 import modelo.GestorUsuario;
 import modelo.Usuario;
 
 public class VentanaRegistro {
     private GestorUsuario gestor;
-    private Usuario usuarioActual;
+
 
     public void mostrarVentana(GestorUsuario gestorCompartido){
             this.gestor = gestorCompartido;
@@ -56,18 +55,19 @@ public class VentanaRegistro {
 
                 JOptionPane.showMessageDialog(null, "Registro exitoso...");
 
-                VentanaMenu menu = new VentanaMenu(usuarioActual);
-                menu.mostrarVentana();
                 ventana.dispose(); // Destruye la ventana de registro
 
-//                // Vuelve a abrir el login con la base de datos actualizada
-//                VentanaLogin ventanaLog = new VentanaLogin(this.gestor);
-//                ventanaLog.mostrarVentana();
+                // Vuelve a abrir el login con la base de datos actualizada
+                VentanaLogin ventanaLog = new VentanaLogin(this.gestor);
+                ventanaLog.mostrarVentana();
             });
 
             // Estas dos instrucciones finales son obligatorias para que la ventana aparezca en el centro de la pantalla
             ventana.setLocationRelativeTo(null);
             ventana.setVisible(true);
 
+
     }
+
+
 }

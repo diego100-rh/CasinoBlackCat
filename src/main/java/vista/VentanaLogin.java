@@ -2,7 +2,9 @@ package vista;
 
 import javax.swing.*;
 
+import Controlador.SessionController;
 import modelo.GestorUsuario;
+import modelo.Ruleta;
 import modelo.Usuario;
 
 public class VentanaLogin {
@@ -14,13 +16,9 @@ public class VentanaLogin {
     private final JButton btnIngresar = new JButton("Ingresar");
     private final JButton btnRegistrar = new JButton("Registrarse");
 
-    public VentanaLogin(GestorUsuario gestorExistente){
-        this.gestor = gestorExistente;
-        configurarVentana();
-    }
     public VentanaLogin() {
-       this.gestor = new GestorUsuario();
-       configurarVentana();
+        this.gestor = new GestorUsuario(); // Crea la base de datos vacía al iniciar
+        configurarVentana();
     }
 
     public void mostrarVentana() {
@@ -48,10 +46,15 @@ public class VentanaLogin {
         btnRegistrar.addActionListener(actionEvent -> {
             frame.dispose();// matar la ventana login actual
             VentanaRegistro ventanaReg = new VentanaRegistro();
-            ventanaReg.mostrarVentana(gestor);// Abre el registro compartiendo la base de datos
+            ventanaReg.mostrarVentana(this.gestor);// Abre el registro compartiendo la base de datos
         });
 
         }
+
+    public VentanaLogin(GestorUsuario gestorExistente) {
+        this.gestor = gestorExistente; // Recibe el gestor que ya tiene al nuevo jugador
+        configurarVentana();
+    }
 
       public void login() {
           String user = txtUsuario.getText();
@@ -59,15 +62,20 @@ public class VentanaLogin {
 
           // Asumiendo que validarCredenciales ahora devuelve un objeto Usuario (o null si falla)
           Usuario usuarioLogueado = gestor.validarCredenciales(user, password);
-
           if (usuarioLogueado != null) {
               JOptionPane.showMessageDialog(null, "Login exitoso, Bienvenido " + usuarioLogueado.getNombre());
               frame.dispose();
-              VentanaMenu menu = new VentanaMenu(usuarioLogueado); // Pasamos el objeto completo
+
+              // 1. Nace el SessionController usando el usuario que acaba de ingresar
+              SessionController sesion = new SessionController(usuarioLogueado);
+
+              // 2. Se los pasamos a VentanaMenu cumpliendo con lo que pide su constructor
+              VentanaMenu menu = new VentanaMenu(usuarioLogueado, sesion);
               menu.mostrarVentana();
           } else {
               JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");
           }
+
       }
 
 }

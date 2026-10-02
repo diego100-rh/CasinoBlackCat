@@ -1,4 +1,5 @@
 package vista;
+import Controlador.SessionController;
 import modelo.Usuario;
 
 
@@ -13,34 +14,64 @@ public class VistaPerfil {
     public VistaPerfil(Usuario usuario) {
         this.usuarioActual = usuario;
     }
-    public void mostrarVentana(JFrame frame, Usuario usuarioActual) {
+    public void mostrarVentana(SessionController controlador) {
 
-        frame = new JFrame("Mi Perfil");
+        JFrame frame = new JFrame("Mi Perfil " + usuarioActual.getNombre() + "Bienvenido denuevo!!");
         frame.setSize(550, 400);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
 
-        // Usamos los métodos 'get' del objeto en lugar de variables sueltas
-        JLabel lblBienvenida = new JLabel("Saldo: " + this.usuarioActual.getSaldo());
-        lblBienvenida.setBounds(30, 20, 400, 30);
-        frame.add(lblBienvenida);
+        JLabel lblNombre = new JLabel("Nuevo Nombre:");
+        lblNombre.setBounds(30, 70, 200, 30);
+        frame.add(lblNombre);
 
-        // Obtenemos el nombre directamente del objeto
-        frame.add(new JLabel("Usuario:" + usuarioActual.getNombre()));
-        frame.add(new JLabel(""));
-        frame.add(new JLabel("Ingrese Monto a recargar $:"));
-        frame.add(txtmontoNv);
-        frame.add(new JLabel(""));
-        frame.add(btnfconfirmar);
+        JTextField cajaNombrenv = new JTextField();
+        cajaNombrenv.setBounds(30, 100, 200, 30);
+        frame.add(cajaNombrenv);
 
-        // Aquí iría Action Listener para el botón
-        /*
-        btnfconfirmar.addActionListener(e -> {
-            int montoRecarga = Integer.parseInt(txtmontoNv.getText());
-            int nuevoSaldo = usuarioActual.getSaldo() + montoRecarga;
-            usuarioActual.setSaldo(nuevoSaldo); // Modificas el atributo del objeto
+        JLabel lblSaldoRecargar = new JLabel("Ingrese saldo a recargar $:");
+        lblSaldoRecargar.setBounds(30, 140, 200, 30);
+        frame.add(lblSaldoRecargar);
+
+        JTextField cajasaldonv = new JTextField();
+        cajasaldonv.setBounds(30, 170, 200, 30);
+        frame.add(cajasaldonv);
+
+        JButton btnmodificar = new JButton("Modificar");
+        btnmodificar.setBounds(30, 220, 120, 30);
+        frame.add(btnmodificar);
+
+        JLabel lblslado = new JLabel("Saldo: " + controlador.getSaldoUsuario());
+
+        btnmodificar.addActionListener(e -> {
+            //captura de datos
+            String textNombre = cajaNombrenv.getText().trim();
+            String textosaldo = cajasaldonv.getText().trim();
+
+            // Validar que no envíen campos vacíos
+            if (textNombre.isEmpty() || textosaldo.isEmpty()){
+                JOptionPane.showMessageDialog(frame, "Por favor, complete todos los campos.");
+                return;
+            }
+             try {
+                 // Convertimos el texto del saldo a un número entero
+                 int monto = Integer.parseInt(textosaldo);
+
+                 controlador.gestionarRecargaYPerfil(textNombre, monto);
+
+                 // 5. Actualizamos el JLabel para que el usuario vea el cambio
+                 lblslado.setText("Saldo: " + controlador.getSaldoUsuario());
+                 JOptionPane.showMessageDialog(frame, "Perfil actualizado correctamente.");
+
+             } catch (NumberFormatException ex) {
+            // atrapa el error si el usuario escribe letras en la caja de saldo
+                 JOptionPane.showMessageDialog(frame, "Error: El saldo debe ser un número válido.");
+
+             }
         });
-        */
+
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 }

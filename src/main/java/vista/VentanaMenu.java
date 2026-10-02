@@ -1,4 +1,5 @@
 package vista;
+import Controlador.SessionController;
 import modelo.Ruleta;
 import modelo.Usuario;
 import javax.swing.*;
@@ -7,10 +8,12 @@ public class VentanaMenu {
     private JFrame frame;
     private Ruleta motorCentral;
     private Usuario usuarioActual;
+    private SessionController sesion;
 
-    public VentanaMenu(Usuario usuarioActual) {
+    public VentanaMenu(Usuario usuarioActual, SessionController controladorSesion) {
         this.usuarioActual = usuarioActual; // Guardas todo el objeto (nombre, saldo, etc.)
         this.motorCentral = new Ruleta();
+        this.sesion = controladorSesion;
         configurarVentana();
 
     }
@@ -22,9 +25,20 @@ public class VentanaMenu {
         frame.setLayout(null);
         frame.setLocationRelativeTo(null); // Centra la ventana en la pantalla
 
-        JLabel lblBienvenida = new JLabel("Bienvenido/a al menú principal, " + usuarioActual.getNombre());
-        lblBienvenida.setBounds(30, 20, 400, 30);
-        frame.add(lblBienvenida);
+       // ... (justo debajo de frame.setLocationRelativeTo(null);)
+
+      JLabel lblBienvenida = new JLabel();
+      lblBienvenida.setBounds(30, 20, 400, 30);
+      frame.add(lblBienvenida);
+
+        frame.addWindowFocusListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowGainedFocus(java.awt.event.WindowEvent e) {
+                // Consulta el saldo cada vez que la ventana pasa a primer plano
+                lblBienvenida.setText("Jugador: " + usuarioActual.getNombre() +
+                        " | Saldo: $" + usuarioActual.getSaldo());
+            }
+        });
 
         JButton btnJugar = new JButton("Jugar");
         btnJugar.setBounds(30, 70, 120, 30);
@@ -42,6 +56,7 @@ public class VentanaMenu {
         btnrperfilUsuario.setBounds(30, 205, 120, 30);
         frame.add(btnrperfilUsuario);
 
+
         // Acción del botón Salir: Destruye el menú y revive el Login
         btnSalir.addActionListener(e -> {
             frame.dispose();
@@ -50,14 +65,16 @@ public class VentanaMenu {
         });
 
         btnrperfilUsuario.addActionListener(e -> {
-            VistaPerfil perfil$ = new VistaPerfil(usuarioActual);
-            perfil$.mostrarVentana(frame,usuarioActual);
+            // 1. Instancias el controlador envolviendo al usuario que tienes en el menú
+            SessionController controladorSesion = new SessionController(this.usuarioActual);
+
+            // 2. Instancias la vista y le pasas el controlador
+            VistaPerfil perfil = new VistaPerfil(usuarioActual);
+            perfil.mostrarVentana(controladorSesion);
         });
 
-
-        // Acciones temporales para conectar en el siguiente paso
         btnJugar.addActionListener(e -> {
-            VentanaRuleta ruleta = new VentanaRuleta(motorCentral);
+            VentanaRuleta ruleta = new VentanaRuleta(motorCentral,sesion);
             ruleta.mostrarVentana();
         });
         // Al botón historial le pasas el mismo motor

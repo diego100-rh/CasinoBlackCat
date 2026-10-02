@@ -24,22 +24,20 @@ public class Usuario {
     public int getSaldo(){return saldo;}
 
     public int depositar(int monto){
-
-        if(monto>0 )  {
+        if (monto > 0) {
             this.saldo += monto;
-        } else {
-
         }
-        return saldo *= monto;
+        return this.saldo; // Solo devuelve el saldo actualizado
     }
 
     public int descontarSaldo(int monto){
-        if(monto >0){
+        if (monto > 0) {
             this.saldo -= monto;
-
-        }else {}
-        return saldo -= monto;
+        }
+        return this.saldo;
     }
 
-
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
 }
