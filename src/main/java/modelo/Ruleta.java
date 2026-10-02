@@ -16,6 +16,7 @@ public class Ruleta {
     public int getHistorialSize() {
         return historialSize;
     }
+
     public boolean registrarResultado(int numero, int apuesta, boolean acierto) {
         // Verificamos que aún haya espacio en el arreglo
         if (historialSize < MAX_HISTORIAL) {
@@ -40,7 +41,6 @@ public class Ruleta {
         }
         return dinero;
     }
-
     public int calcularVictoria() {
         int victorias = 0;
         for (int i = 0; i < historialSize; i++) {

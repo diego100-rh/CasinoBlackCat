@@ -31,7 +31,7 @@ public class Usuario {
     }
 
     public int descontarSaldo(int monto){
-        if (monto > 0) {
+        if (monto > 0 && this.saldo >= monto) {
             this.saldo -= monto;
         }
         return this.saldo;

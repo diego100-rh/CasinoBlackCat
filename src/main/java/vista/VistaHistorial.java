@@ -1,21 +1,20 @@
 package vista;
-import modelo.Ruleta;
-import modelo.Usuario;
-
+import Controlador.ResultadosController;
 import javax.swing.*;
 
 public class VistaHistorial {
     private JFrame frame;
-    private Usuario usuarioActual;
-    private Ruleta motorRuleta;
-    // El constructor ahora exige recibir el motor que ya tiene los datos, para no crear uno NEW DESDE 0
-    public VistaHistorial(Usuario usuarioActual, Ruleta motorOriginal){
-        this.motorRuleta=motorOriginal;
-        configurarVentanaHistorial(usuarioActual);
+    private ResultadosController controlador; // Usamos el controlador, no la ruleta
+    private String nombreJugador;
 
+    // El constructor ahora exige recibir el motor que ya tiene los datos, para no crear uno NEW DESDE 0
+    public VistaHistorial(String nombreJugador, ResultadosController controlador) {
+        this.nombreJugador = nombreJugador;
+        this.controlador = controlador;
+        configurarVentanaHistorial();
     }
 
-    public void configurarVentanaHistorial(Usuario usuarioActual){
+    public void configurarVentanaHistorial(){
         frame = new JFrame("Ruleta - Historial ");
         frame.setSize(400, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -30,12 +29,11 @@ public class VistaHistorial {
         JTextArea txtReporte = new JTextArea();
         txtReporte.setEditable(false); // Evita que el usuario borre texto
 
-        int partidas = motorRuleta.getHistorialSize();
-        int victoria = motorRuleta.calcularVictoria();
-        int dinero = motorRuleta.calcularDineroGastado();
+        int partidas = this.controlador.obtenerTotalJugadas();
+        int victoria = this.controlador.obtenerTotalVictorias();
+        int dinero = this.controlador.obtenerGastosTotales();
 
-        String textoEstadisticas = "Usuario: " + usuarioActual.getNombre()+ "\n"
-                + "-----------------------------------\n"
+        String textoEstadisticas = "Usuario: " + this.nombreJugador + "\n\n"
                 + "Partidas jugadas: " + partidas + "\n"
                 + "Victorias obtenidas: " + victoria + "\n"
                 + "Dinero total apostado: $" + dinero;

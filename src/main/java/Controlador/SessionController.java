@@ -7,15 +7,6 @@ public class SessionController {
     public SessionController(Usuario usuario) {
         this.usuarioActual = usuario;
     }
-    // 1. Operación : La vista llamará a este método para modificar datos
-    public void gestionarRecargaYPerfil(String nuevoNombre, int monto) {
-        if (!nuevoNombre.isEmpty()) {
-            this.usuarioActual.setNombre(nuevoNombre);
-        }
-        if (monto > 0) {
-            this.usuarioActual.depositar(monto);
-        }
-    }
     // 2. Operaciones lectura: La vista pide los datos a través del controlador
     public int getSaldoUsuario() {
         return this.usuarioActual.getSaldo();
@@ -25,11 +16,6 @@ public class SessionController {
         return this.usuarioActual.depositar(montoRecarga);
 
     }
-
-    public String getNombreUsuario() {
-        return this.usuarioActual.getNombre();
-    }
-
     // Método para que la ruleta cobre la apuesta
     public void cobrarApuesta(int monto) {
         this.usuarioActual.descontarSaldo(monto);

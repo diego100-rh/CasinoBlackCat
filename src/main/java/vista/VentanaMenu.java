@@ -1,4 +1,5 @@
 package vista;
+import Controlador.ResultadosController;
 import Controlador.SessionController;
 import modelo.Ruleta;
 import modelo.Usuario;
@@ -79,7 +80,10 @@ public class VentanaMenu {
         });
         // Al botón historial le pasas el mismo motor
         btnHistorial.addActionListener(e -> {
-            VistaHistorial historial = new VistaHistorial(usuarioActual, motorCentral);
+            // 1. Creamos el controlador pasándole el motor central
+            ResultadosController controlHistorial = new ResultadosController(this.motorCentral);
+
+            VistaHistorial historial = new VistaHistorial(this.usuarioActual.getNombre(), controlHistorial);
             historial.mostrarVentana();
         });
     }

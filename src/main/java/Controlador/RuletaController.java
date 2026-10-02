@@ -4,27 +4,25 @@ import modelo.TipoApuesta;
 
 public class RuletaController {
     private Ruleta motorRuleta;
-    public RuletaController(Ruleta ruleta) {
+    private SessionController sesion;
+    public RuletaController(Ruleta ruleta, SessionController sesion){
+        this.motorRuleta = ruleta;
+        this.sesion = sesion;
         this.motorRuleta = ruleta;
     }
-
-    // El método central que procesa la lógica
     public String procesarApuesta(int monto, TipoApuesta tipo) {
-
-        // 1. Delegamos el giro a la clase Ruleta
         int numeroGanador = motorRuleta.girarRuleta();
-
-        // 2. Delegamos la evaluación matemática
         boolean victoria = tipo.evaluarResultado(numeroGanador, tipo);
 
-        // 3. Delegamos el registro estadístico
         motorRuleta.registrarResultado(numeroGanador, monto, victoria);
-
-        // 4. Preparamos la respuesta para la Vista
         if (victoria) {
-            return "Número ganador: " + numeroGanador + " - ¡GANASTE!";
+
+            sesion.pagarPremio(monto);
+            return "Número ganador: " + numeroGanador + " - ¡GANASTE $" + monto + "!";
         } else {
-            return "Número ganador: " + numeroGanador + " - Perdiste. Inténtalo de nuevo.";
+            // Si pierde, se descuenta el monto de su cuenta
+            sesion.cobrarApuesta(monto);
+            return "Número ganador: " + numeroGanador + " - Perdiste $" + monto + ".";
         }
     }
 }

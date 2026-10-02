@@ -14,8 +14,8 @@ public class VentanaRuleta {
 
     public VentanaRuleta(Ruleta motorCompartido, SessionController controladorSesion) {
         this.motorRuleta = motorCompartido; // Instanciamos el motor al abrir la ventana
-        this.ruletaController = new RuletaController(this.motorRuleta);
         this.sesion = controladorSesion;
+        this.ruletaController = new RuletaController(this.motorRuleta, this.sesion);
         configurarVentana();
     }
 
