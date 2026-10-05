@@ -1,0 +1,7 @@
+como evidencia textual para este laboratorio se efectúa el uso 
+de tres controladores esenciales que separan la lógica de las vistas, 
+¿a qué me refiero con esto? si se realiza alguna operación en las vistas 
+por el ejemplo la acción de algún botón esta ejecutará la llamada al controlador correspondiente 
+y por consecuencia al método necesario para efectuar la acción, 
+esto no genera un flujo de control donde libramos la dependencia de las vistas directamente con la lógica 
+permitiendo así un flujo más estructurado mediante controlador-modelo-vista.
