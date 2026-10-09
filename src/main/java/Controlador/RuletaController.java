@@ -12,9 +12,9 @@ public class RuletaController {
     }
     public String procesarApuesta(int monto, TipoApuesta tipo) {
         int numeroGanador = motorRuleta.girarRuleta();
-        boolean victoria = tipo.evaluarResultado(numeroGanador, tipo);
+        boolean victoria = tipo.evaluarResultado(numeroGanador);
 
-        motorRuleta.registrarResultado(numeroGanador, monto, victoria);
+        motorRuleta.registrarResultado(numeroGanador, monto, victoria, tipo);
         if (victoria) {
 
             sesion.pagarPremio(monto);

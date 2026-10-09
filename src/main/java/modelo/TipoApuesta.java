@@ -1,10 +1,12 @@
 package modelo;
-
-import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.*;
+
 public enum TipoApuesta {
+
     ROJO, NEGRO, PAR, IMPAR;
 
     private static final List<Integer> NUMEROS_ROJOS = Arrays.asList(
@@ -15,9 +17,9 @@ public enum TipoApuesta {
         return NUMEROS_ROJOS.contains(numero);
     }
 
-    public boolean evaluarResultado(int numero, TipoApuesta tipo) {
+    public boolean evaluarResultado(int numero) {
         if (numero == 0) return false;
-        return switch (tipo) {
+        return switch (this) {
             case ROJO -> esRojo(numero);
             case NEGRO -> !esRojo(numero);
             case PAR -> numero % 2 == 0;

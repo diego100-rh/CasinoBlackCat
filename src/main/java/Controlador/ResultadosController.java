@@ -21,7 +21,7 @@ public class ResultadosController {
         return this.motorRuleta.calcularVictoria();
     }
 
-    public int obtenerTotalJugadas() {
-        return this.motorRuleta.getHistorialSize();
-    }
+//    public int obtenerTotalJugadas() {
+//        return this.motorRuleta.geths();
+//    }
 }
