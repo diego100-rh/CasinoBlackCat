@@ -13,7 +13,7 @@ public class Ruleta {
 
 
     public Ruleta (Resultado resultado){
-        this.resultado = resultado;
+        this.resultado = resultado; //nv
     }
 
     public int girarRuleta() {
