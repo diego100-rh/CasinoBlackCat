@@ -7,15 +7,11 @@ import Controlador.RuletaController;
 
 public class VentanaRuleta {
     private JFrame frame;
-    private SessionController sesion;
-    private Ruleta motorRuleta;// Conexión directa con lógica matemática
-    private RuletaController ruletaController;
-    private TipoApuesta evaluarTipoApuesta;
+    private RuletaController controlador;
 
-    public VentanaRuleta(Ruleta motorCompartido, SessionController controladorSesion) {
-        this.motorRuleta = motorCompartido; // Instanciamos el motor al abrir la ventana
-        this.sesion = controladorSesion;
-        this.ruletaController = new RuletaController(this.motorRuleta, this.sesion);
+
+    public VentanaRuleta(RuletaController controlador) {
+        this.controlador = controlador;
         configurarVentana();
     }
 
@@ -72,23 +68,16 @@ public class VentanaRuleta {
                 JOptionPane.showMessageDialog(frame, "El monto de la apuesta debe ser mayor a $0.");
                 return;
             }
-            int saldoActual = sesion.getSaldoUsuario();
+            int saldoActual = this.controlador.obtenerSaldo();
 
             if (monto > saldoActual) {
                 JOptionPane.showMessageDialog(frame, "Saldo insuficiente. Tienes $" + saldoActual);
                 return;
             }
-            sesion.cobrarApuesta(monto);
 
             TipoApuesta tipoSeleccionado = (TipoApuesta) comboApuesta.getSelectedItem();
-            String resultadoMensaje = this.ruletaController.procesarApuesta(monto, tipoSeleccionado);
+            String resultadoMensaje = this.controlador.procesarApuesta(monto, tipoSeleccionado);
             lblResultado.setText(resultadoMensaje);
-
-            if (resultadoMensaje.contains("GANASTE")) {
-                // Si gana una apuesta simple (rojo/negro/par/impar), recupera su apuesta y gana otro tanto igual
-                int premio = monto * 2;
-                sesion.pagarPremio(premio);
-            }
         });
     }
 

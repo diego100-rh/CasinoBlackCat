@@ -1,84 +1,34 @@
 package vista;
-import Controlador.SessionController;
-import modelo.Usuario;
+import javax.swing.*;
 
-
+import Controlador.SessionController; // Importamos el controlador, NO el modelo
 import javax.swing.*;
 
 public class VistaPerfil {
-    private Usuario usuarioActual;
+    private SessionController sesion;
 
-    public VistaPerfil(Usuario usuario) {
-        this.usuarioActual = usuario;
+    // 2. El constructor ahora exige la sesión
+    public VistaPerfil(SessionController sesion) {
+        this.sesion = sesion;
     }
-    public void mostrarVentana(SessionController controlador) {
 
-        JFrame frame = new JFrame("Mi Perfil " + usuarioActual.getNombre() + "Bienvenido denuevo!!");
-        frame.setSize(550, 400);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setLayout(null);
-        frame.setLocationRelativeTo(null);
+    public void mostrarVentana() {
 
-        JLabel lblNombre = new JLabel("Nuevo Nombre:");
-        lblNombre.setBounds(30, 70, 200, 30);
-        frame.add(lblNombre);
+        JFrame fr = new JFrame("Ruleta - Pefil");
+        fr.setSize(400, 300);
+        fr.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JTextField cajaNombrenv = new JTextField();
-        cajaNombrenv.setBounds(30, 100, 200, 30);
-        frame.add(cajaNombrenv);
 
-        JLabel lblSaldoRecargar = new JLabel("Ingrese saldo a recargar $:");
-        lblSaldoRecargar.setBounds(30, 140, 200, 30);
-        frame.add(lblSaldoRecargar);
 
-        JTextField cajasaldonv = new JTextField();
-        cajasaldonv.setBounds(30, 170, 200, 30);
-        frame.add(cajasaldonv);
 
-        JButton btnmodificar = new JButton("Modificar");
-        btnmodificar.setBounds(30, 220, 120, 30);
-        frame.add(btnmodificar);
+        //código de dibujar la ventana ...
 
-        JLabel lblslado = new JLabel("Saldo: " + controlador.getSaldoUsuario());
+        // Cuando necesites mostrar los datos en pantalla, se los pides a la sesión:
+        // lblNombre.setText(this.sesion.getNombreUsuario());
+        // lblSaldo.setText(String.valueOf(this.sesion.getSaldoUsuario()));
 
-        btnmodificar.addActionListener(e -> {
-            // 1. PROCESAR CAMBIO DE NOMBRE
-            // Leemos directamente de TU caja de texto
-            String nuevoNombre = cajaNombrenv.getText().trim();
+        fr.setLocationRelativeTo(null);
+        fr.setVisible(true);
 
-            if (!nuevoNombre.isEmpty()) {
-                controlador.actualizarNombreUsuario(nuevoNombre);
-                JOptionPane.showMessageDialog(frame, "Nombre actualizado con éxito a: " + nuevoNombre);
-
-                // Limpiamos tu caja de texto
-                cajaNombrenv.setText("");
-            }
-
-            // 2. PROCESAR RECARGA DE SALDO
-            // Leemos directamente caja de texto para el saldo
-            String textoMonto = cajasaldonv.getText().trim();
-
-            if (!textoMonto.isEmpty()) {
-                try {
-                    int montoRecarga = Integer.parseInt(textoMonto);
-                    if (montoRecarga > 0) {
-                        // Delegamos la recarga al controlador
-                        controlador.recargarSaldo(montoRecarga);
-                        JOptionPane.showMessageDialog(frame, "Recarga exitosa. Nuevo saldo: $" + controlador.getSaldoUsuario());
-
-                        // Limpiamos tu caja de texto
-                        cajasaldonv.setText("");
-                    } else {
-                        JOptionPane.showMessageDialog(frame, "El monto a recargar debe ser mayor a 0.");
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Error: Ingrese un monto numérico válido.");
-                }
-            }
-
-        });
-
-        frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
     }
 }

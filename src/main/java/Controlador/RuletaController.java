@@ -25,4 +25,8 @@ public class RuletaController {
             return "Número ganador: " + numeroGanador + " - Perdiste $" + monto + ".";
         }
     }
+
+    public int obtenerSaldo() {
+        return this.sesion.getSaldoUsuario();
+    }
 }

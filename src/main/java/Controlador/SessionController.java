@@ -28,6 +28,7 @@ public class SessionController {
     public void pagarPremio(int montoGanado) {
         this.usuarioActual.depositar(montoGanado);
     }
+
     public void actualizarNombreUsuario(String nuevoNombre) {
         // Validamos que no envíen un texto vacío antes de molestar al Modelo
         if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
@@ -38,4 +39,6 @@ public class SessionController {
         return this.usuarioActual.getHistorialJugadas();
     }
 
+    public String getNombreUsuario() {return this.usuarioActual.getNombre();
+    }
 }
