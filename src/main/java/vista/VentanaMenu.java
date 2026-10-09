@@ -11,12 +11,9 @@ public class VentanaMenu {
     private Usuario usuarioActual;
     private SessionController sesion;
 
-    public VentanaMenu(Usuario usuarioActual, SessionController controladorSesion) {
-        this.usuarioActual = usuarioActual; // Guardas todo el objeto (nombre, saldo, etc.)
+    public VentanaMenu(SessionController sesion) {
         this.motorCentral = new Ruleta();
-        this.sesion = controladorSesion;
         configurarVentana();
-
     }
     public void configurarVentana(){
 
@@ -81,7 +78,7 @@ public class VentanaMenu {
         // Al botón historial le pasas el mismo motor
         btnHistorial.addActionListener(e -> {
             // 1. Creamos el controlador pasándole el motor central
-            ResultadosController controlHistorial = new ResultadosController(this.motorCentral);
+            ResultadosController controlHistorial = new ResultadosController(sesion);
 
             VistaHistorial historial = new VistaHistorial(this.usuarioActual.getNombre(), controlHistorial);
             historial.mostrarVentana();

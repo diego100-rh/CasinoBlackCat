@@ -29,15 +29,10 @@ public class VistaHistorial {
         JTextArea txtReporte = new JTextArea();
         txtReporte.setEditable(false); // Evita que el usuario borre texto
 
-        int partidas = this.controlador.obtenerTotalJugadas();
-        int victoria = this.controlador.obtenerTotalVictorias();
-        int dinero = this.controlador.obtenerGastosTotales();
+        // En tu VistaHistorial.java
+        String reporteCompleto = this.controlador.obtenerDetalleHistorial();
+        txtReporte.setText("Usuario: " + this.nombreJugador + "\n\n" + reporteCompleto);
 
-        String textoEstadisticas = "Usuario: " + this.nombreJugador + "\n\n"
-                + "Partidas jugadas: " + partidas + "\n"
-                + "Victorias obtenidas: " + victoria + "\n"
-                + "Dinero total apostado: $" + dinero;
-        txtReporte.setText(textoEstadisticas);
         // Le añadimos scroll por si el texto crece mucho
         JScrollPane scroll = new JScrollPane(txtReporte);
         scroll.setBounds(30, 60, 320, 150);

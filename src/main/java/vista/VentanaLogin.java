@@ -70,7 +70,7 @@ public class VentanaLogin {
               SessionController sesion = new SessionController(usuarioLogueado);
 
               // 2. Se los pasamos a VentanaMenu cumpliendo con lo que pide su constructor
-              VentanaMenu menu = new VentanaMenu(usuarioLogueado, sesion);
+              VentanaMenu menu = new VentanaMenu(sesion);
               menu.mostrarVentana();
           } else {
               JOptionPane.showMessageDialog(null, "Error: Credenciales incorrectas");

@@ -1,5 +1,8 @@
 package Controlador;
+import modelo.Resultado;
 import modelo.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionController {
     private Usuario usuarioActual;
@@ -7,7 +10,7 @@ public class SessionController {
     public SessionController(Usuario usuario) {
         this.usuarioActual = usuario;
     }
-    // 2. Operaciones lectura: La vista pide los datos a través del controlador
+    //  Operaciones lectura: La vista pide los datos a través del controlador
     public int getSaldoUsuario() {
         return this.usuarioActual.getSaldo();
     }
@@ -21,7 +24,7 @@ public class SessionController {
         this.usuarioActual.descontarSaldo(monto);
     }
 
-    // Método para que la ruleta de el premio
+    // Método para la ruleta de el premio
     public void pagarPremio(int montoGanado) {
         this.usuarioActual.depositar(montoGanado);
     }
@@ -30,6 +33,9 @@ public class SessionController {
         if (nuevoNombre != null && !nuevoNombre.trim().isEmpty()) {
             this.usuarioActual.setNombre(nuevoNombre);
         }
+    }
+    public List<Resultado> getHistorialUsuario() {
+        return this.usuarioActual.getHistorialJugadas();
     }
 
 }

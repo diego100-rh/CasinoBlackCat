@@ -44,5 +44,6 @@ public class Ruleta {
         return victorias;
     }
 
+
 }
 
