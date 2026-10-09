@@ -13,8 +13,10 @@ public class RuletaController {
     public String procesarApuesta(int monto, TipoApuesta tipo) {
         int numeroGanador = motorRuleta.girarRuleta();
         boolean victoria = tipo.evaluarResultado(numeroGanador);
-
+        //ruleta anota su historial global
         motorRuleta.registrarResultado(numeroGanador, monto, victoria, tipo);
+        //El usuario anota su historial personal
+        sesion.registrarJugadaPersonal(numeroGanador, monto, victoria, tipo);
         if (victoria) {
 
             sesion.pagarPremio(monto);

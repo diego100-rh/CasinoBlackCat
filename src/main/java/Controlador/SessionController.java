@@ -1,5 +1,6 @@
 package Controlador;
 import modelo.Resultado;
+import modelo.TipoApuesta;
 import modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +41,12 @@ public class SessionController {
     }
 
     public String getNombreUsuario() {return this.usuarioActual.getNombre();
+    }
+
+    public void registrarJugadaPersonal(int numero, int apuesta, boolean victoria, TipoApuesta tipo) {
+
+        modelo.Resultado boleta = new modelo.Resultado(numero, apuesta, victoria, tipo);
+        // La guardamos en la lista del usuario actual
+        this.usuarioActual.getHistorialJugadas().add(boleta);
     }
 }
