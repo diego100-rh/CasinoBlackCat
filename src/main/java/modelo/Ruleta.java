@@ -4,10 +4,17 @@ import java.util.Random;
 
 public class Ruleta {
 
+    private Resultado resultado;
+
     private final int MAX_HISTORIAL = 100;
     private Resultado[] historial = new Resultado[MAX_HISTORIAL];
     private int historialSize = 0;
     private Random rng = new Random();
+
+
+    public Ruleta (Resultado resultado){
+        this.resultado = resultado;
+    }
 
     public int girarRuleta() {
         //nota: nextInt(37) genera números desde el 0 hasta el 36 inclusive
