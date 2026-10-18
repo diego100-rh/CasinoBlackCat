@@ -41,7 +41,7 @@ public class VentanaEstadisticas extends JFrame {
                     + "Porcentaje de Éxito: " + String.format("%.1f", this.estadistica.getPorcentajeVictorias()) + "%\n"
                     + "Racha Máxima de Victorias: " + this.estadistica.getRachaMaxima() + "\n\n";
 
-            // 3. Agregamos apuesta favorita
+            // 3. Agregamos apuesta mas usadas
             if (this.estadistica.getTipoMasJugado() != null) {
                 textoVisual += "Apuesta Favorita: " + this.estadistica.getTipoMasJugado() + "\n";
             }
