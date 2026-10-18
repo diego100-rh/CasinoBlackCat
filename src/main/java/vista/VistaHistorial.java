@@ -1,5 +1,7 @@
 package vista;
 import Controlador.ResultadosController;
+import modelo.Estadistica;
+
 import javax.swing.*;
 
 public class VistaHistorial {
@@ -33,6 +35,11 @@ public class VistaHistorial {
 
         JScrollPane scroll = new JScrollPane(txtReporte);
         scroll.setBounds(30, 60, 320, 180);
+        // Le pedimos al controlador que haga los cálculos
+
+// Creamos la ventana pasándole esas estadísticas
+        VentanaEstadisticas ventanaStats = new VentanaEstadisticas( controlador);
+        ventanaStats.mostrarVentana();
 
         frame.add(scroll);
 

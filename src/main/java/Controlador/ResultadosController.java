@@ -1,4 +1,5 @@
 package Controlador;
+import modelo.Estadistica;
 import modelo.Resultado;
 import modelo.Ruleta;
 import modelo.Usuario;
@@ -11,6 +12,21 @@ public class ResultadosController {
     public ResultadosController(SessionController sesion) {
         this.sesion = sesion;
     }
+
+    public Estadistica obtenerEstadisticas() {
+        // 1. Sacamos la lista del usuario
+        List<Resultado> historial = sesion.getHistorialUsuario();
+
+        // 2. Creamos el objeto del modelo
+        Estadistica estadisticas = new Estadistica();
+
+        // 3. Le pasamos la lista para que haga su trabajo matemático
+        estadisticas.calcularMetricas(historial);
+
+        // 4. Devolvemos el objeto ya calculado para que la ventana lo muestre
+        return estadisticas;
+    }
+
     public String obtenerDetalleHistorial(){
         List<Resultado> historial = sesion.getHistorialUsuario();
 
