@@ -15,7 +15,8 @@ public class Ruleta {
     public Ruleta() {
         this.rng = new Random();
         this.archivos = new GestorArchivos();
-        this.historialGeneral = new ArrayList<>(); // Nace vacía
+        // cargamos el historial persistido en el disco
+        this.historialGeneral = this.archivos.cargarHistorial();
     }
 
     public int girarRuleta() {

@@ -1,10 +1,10 @@
 package GestorDeArchivos;
 import modelo.Resultado;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GestorArchivos {
     // Nombre del archivo que se creará en la carpeta del proyecto
     private final String RUTA_ARCHIVO = "historial_jugadas.csv";
@@ -25,6 +25,35 @@ public class GestorArchivos {
         } catch (IOException e) {
             System.out.println("Error al guardar en el archivo: " + e.getMessage());
         }
+    }
+
+    public List<Resultado> cargarHistorial() {
+        List<Resultado> historial = new ArrayList<>();
+        File archivo = new File(RUTA_ARCHIVO);
+
+        // Si el archivo aún no existe retornamos la lista vacía
+        if (!archivo.exists()) {
+            return historial;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                if (datos.length == 4) {
+                    int numero = Integer.parseInt(datos[0]);
+                    int monto = Integer.parseInt(datos[1]);
+                    boolean victoria = Boolean.parseBoolean(datos[2]);
+                    String etiqueta = datos[3];
+
+                    // Reconstruimos el objeto Resultado a partir del texto del CSV
+                    historial.add(new Resultado(numero, monto, victoria, etiqueta));
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+        return historial;
     }
 
 }
