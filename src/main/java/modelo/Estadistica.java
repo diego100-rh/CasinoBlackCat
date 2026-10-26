@@ -8,59 +8,51 @@ public class Estadistica {
 	private int victorias;
 	private double porcentajeVictorias;
 	private int rachaMaxima;
-	private TipoApuesta tipoMasJugado;
+	private String tipoMasJugado;
 
 	public Estadistica (){
 	}
 	public void calcularMetricas(List<Resultado> historial) {
+		// --- Cálculo de totales, victorias y rachas ---
 		this.totalJugadas = historial.size();
 		this.victorias = 0;
 		this.rachaMaxima = 0;
-
 		if (this.totalJugadas == 0) {
-			return; // Si no hay jugadas, terminamos aquí
+			return;
 		}
-		int rachaActual = 0;
 
+		int rachaActual = 0;
 		for (Resultado r : historial) {
 			if (r.isVictoria()) {
 				this.victorias++;
-				rachaActual++; // La racha viva aumenta
-
-				// Si la racha actual supera el récord, actualizamos el récord
+				rachaActual++;
 				if (rachaActual > this.rachaMaxima) {
 					this.rachaMaxima = rachaActual;
 				}
 			} else {
-				// Perdió: la racha viva se corta y vuelve a cero
 				rachaActual = 0;
 			}
-			java.util.Map<TipoApuesta, Integer> contadorApuestas = new java.util.HashMap<>();
-
-			// 2. Recorremos el historial y vamos sumando +1 a cada tipo
-			for (Resultado i : historial) {
-				TipoApuesta tipo = i.getTipoApuesta();
-				// getOrDefault busca si ya tiene un número; si no, empieza en 0, y siempre le suma 1
-				contadorApuestas.put(tipo, contadorApuestas.getOrDefault(tipo, 0) + 1);
-			}
-
-			// 3. Revisamos la libreta para ver cuál tiene el número más alto
-			int maxCantidad = 0;
-			for (java.util.Map.Entry<TipoApuesta, Integer> entrada : contadorApuestas.entrySet()) {
-				if (entrada.getValue() > maxCantidad) {
-					maxCantidad = entrada.getValue();
-					this.tipoMasJugado = entrada.getKey(); // Coronamos al nuevo ganador
-				}
 		}
-		// Calculamos el porcentaje
 		this.porcentajeVictorias = ((double) this.victorias / this.totalJugadas) * 100;
 
-		//  adelante agregaremos la lógica para rachaMaxima y tipoMasJugado
+		// ---  Cálculo de la apuesta más jugada --
+		java.util.Map<String, Integer> contadorApuestas = new java.util.HashMap<>();
+		for (Resultado r : historial) {
+			String tipo = r.getTipoApuesta();
+			contadorApuestas.put(tipo, contadorApuestas.getOrDefault(tipo, 0) + 1);
+		}
+
+		int maxCantidad = 0;
+		for (java.util.Map.Entry<String, Integer> entrada : contadorApuestas.entrySet()) {
+			if (entrada.getValue() > maxCantidad) {
+				maxCantidad = entrada.getValue();
+				this.tipoMasJugado = entrada.getKey();
+			}
+		}
 	}
-}
 	public int getTotalJugadas() { return totalJugadas; }
 	public int getVictorias() { return victorias; }
 	public double getPorcentajeVictorias() { return porcentajeVictorias; }
 	public int getRachaMaxima() { return rachaMaxima; }
-	public TipoApuesta getTipoMasJugado() { return tipoMasJugado; }
+	public String getTipoMasJugado() { return tipoMasJugado; }
 }

@@ -1,8 +1,7 @@
 package Controlador;
 import modelo.Resultado;
-import modelo.TipoApuesta;
 import modelo.Usuario;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class SessionController {

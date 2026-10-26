@@ -1,9 +1,8 @@
 package vista;
-import Controlador.SessionController;
-import modelo.Ruleta;
 import javax.swing.*;
-import modelo.TipoApuesta;
+
 import Controlador.RuletaController;
+import modelo.*;
 
 public class VentanaRuleta {
     private JFrame frame;
@@ -27,8 +26,8 @@ public class VentanaRuleta {
         lblTipo.setBounds(50, 30, 150, 25);
         frame.add(lblTipo);
 
-        // El JComboBox reemplaza a Tipodeapuesta.java.
-        JComboBox<TipoApuesta> comboApuesta = new JComboBox<>(TipoApuesta.values());
+        String[] opcionesApuesta = {"Rojo", "Negro", "Par", "Impar"};
+        JComboBox<String> comboApuesta = new JComboBox<>(opcionesApuesta);
         comboApuesta.setBounds(200, 30, 150, 25);
         frame.add(comboApuesta);
 
@@ -74,9 +73,30 @@ public class VentanaRuleta {
                 JOptionPane.showMessageDialog(frame, "Saldo insuficiente. Tienes $" + saldoActual);
                 return;
             }
+// 1. Obtenemos el texto de la opción seleccionada en el JComboBox
+            String opcionSeleccionada = (String) comboApuesta.getSelectedItem();
 
-            TipoApuesta tipoSeleccionado = (TipoApuesta) comboApuesta.getSelectedItem();
-            String resultadoMensaje = this.controlador.procesarApuesta(monto, tipoSeleccionado);
+// 2. Declaramos la variable de la superclase que guardará la apuesta
+            ApuestaBase miApuesta = null;
+
+// 3. Instanciamos la subclase específica según la opción elegida
+            switch (opcionSeleccionada) {
+                case "Rojo":
+                    miApuesta = new ApuestaRojo(monto);
+                    break;
+                case "Negro":
+                    miApuesta = new ApuestaNegro(monto);
+                    break;
+                case "Par":
+                    miApuesta = new ApuestaPar(monto);
+                    break;
+                case "Impar":
+                    miApuesta = new ApuestaImpar(monto);
+                    break;
+            }
+
+// 4. Se la pasamos al controlador (que ahora recibe un obj ApuestaBase)
+            String resultadoMensaje = this.controlador.procesarApuesta(miApuesta);
             lblResultado.setText(resultadoMensaje);
         });
     }

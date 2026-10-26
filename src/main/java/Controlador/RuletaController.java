@@ -1,7 +1,6 @@
 package Controlador;
 import modelo.ApuestaBase;
 import modelo.Ruleta;
-import modelo.TipoApuesta;
 
 public class RuletaController {
     private Ruleta motorRuleta;
