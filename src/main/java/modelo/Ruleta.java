@@ -1,5 +1,7 @@
 package modelo;
 
+import GestorDeArchivos.GestorArchivos;
+
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +10,11 @@ public class Ruleta {
     private Random rng;
 
     private List<Resultado> historialGeneral;
+    private GestorArchivos archivos;
 
     public Ruleta() {
         this.rng = new Random();
+        this.archivos = new GestorArchivos();
         this.historialGeneral = new ArrayList<>(); // Nace vacía
     }
 
@@ -22,6 +26,9 @@ public class Ruleta {
         // 1. "cada giro de la ruleta deberá generar un objeto Resultado..."
         Resultado nuevoResultado = new Resultado(numero, monto, acierto, etiquetaApuesta);
         this.historialGeneral.add(nuevoResultado);
+
+
+        archivos.guardarJugada(nuevoResultado);
 
         return true;
     }

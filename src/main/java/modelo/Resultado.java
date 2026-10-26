@@ -1,10 +1,13 @@
 package modelo;
 
+import GestorDeArchivos.GestorArchivos;
+
 public class Resultado {
     private int numero;
     private int apuesta;
     private boolean victoria;
     private String etiquetaApuesta;
+    private GestorArchivos archivos;
 
 
 
@@ -13,6 +16,7 @@ public class Resultado {
         this.apuesta = apuesta;
         this.victoria = victoria;
         this.etiquetaApuesta = etiquetaApuesta;
+        this.archivos = new GestorArchivos();
     }
     public int getNumero() {
         return numero;
@@ -29,6 +33,9 @@ public class Resultado {
     public String getTipoApuesta() {
         return etiquetaApuesta;
     }
+
+
+
 
 
 }
