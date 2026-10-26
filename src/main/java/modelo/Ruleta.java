@@ -17,10 +17,10 @@ public class Ruleta {
     public int girarRuleta() {
         return rng.nextInt(37);
     }
-    public boolean registrarResultado(int numero, int monto, boolean acierto, TipoApuesta tipoApuesta) {
+    public boolean registrarResultado(int numero, int monto, boolean acierto, String etiquetaApuesta) {
 
         // 1. "cada giro de la ruleta deberá generar un objeto Resultado..."
-        Resultado nuevoResultado = new Resultado(numero, monto, acierto, tipoApuesta);
+        Resultado nuevoResultado = new Resultado(numero, monto, acierto, etiquetaApuesta);
         this.historialGeneral.add(nuevoResultado);
 
         return true;
@@ -42,6 +42,16 @@ public class Ruleta {
             }
         }
         return victorias;
+    }
+    public String obtenerColor(int numero) {
+        if (numero == 0) {
+            return "Verde";
+        }
+        if (numero % 2 == 0) {
+            return "Negro";
+        } else {
+            return "Rojo";
+        }
     }
 
 

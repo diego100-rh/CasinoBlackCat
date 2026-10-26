@@ -43,9 +43,9 @@ public class SessionController {
     public String getNombreUsuario() {return this.usuarioActual.getNombre();
     }
 
-    public void registrarJugadaPersonal(int numero, int apuesta, boolean victoria, TipoApuesta tipo) {
+    public void registrarJugadaPersonal(int numero, int apuesta, boolean victoria, String etiquetaApuesta) {
 
-        modelo.Resultado boleta = new modelo.Resultado(numero, apuesta, victoria, tipo);
+        modelo.Resultado boleta = new modelo.Resultado(numero, apuesta, victoria, etiquetaApuesta);
         // La guardamos en la lista del usuario actual
         this.usuarioActual.getHistorialJugadas().add(boleta);
     }

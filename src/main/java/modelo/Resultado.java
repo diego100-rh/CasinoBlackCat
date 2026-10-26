@@ -4,15 +4,15 @@ public class Resultado {
     private int numero;
     private int apuesta;
     private boolean victoria;
-    private TipoApuesta tipoApuesta;
+    private String etiquetaApuesta;
 
 
 
-    public Resultado(int numero, int apuesta, boolean victoria, TipoApuesta tipoApuesta) {
+    public Resultado(int numero, int apuesta, boolean victoria, String etiquetaApuesta) {
         this.numero = numero;
         this.apuesta = apuesta;
         this.victoria = victoria;
-        this.tipoApuesta = tipoApuesta;
+        this.etiquetaApuesta = etiquetaApuesta;
     }
     public int getNumero() {
         return numero;
@@ -26,8 +26,8 @@ public class Resultado {
         return victoria;
     }
 
-    public TipoApuesta getTipoApuesta() {
-        return this.tipoApuesta;
+    public String getTipoApuesta() {
+        return etiquetaApuesta;
     }
 
 
